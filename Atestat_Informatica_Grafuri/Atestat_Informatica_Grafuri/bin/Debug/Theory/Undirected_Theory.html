@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset = UTF-8>
+	<title>Teorie Grafuri Neorientate</title>
+	<link href = "styles.css" rel = "stylesheet" type = "text/css">
+</head>
+<body>
+	<div id = "main">
+	<!-- start page -->
+	<div id = "top"></div>	
+	<div id = "page">
+	<!-- start content -->
+	<div id = "content">
+	<h2>Terminologie</h2>		
+	<p><strong>Definiție: </strong>Se numește <strong>graf neorientat</strong> o pereche ordonată de mulțimi <strong>G = (X, U)</strong>, unde:</p><br>
+	<ul>
+		<li><strong>X</strong> este o mulțime finită și nevidă de elemente numite <strong>vârfuri</strong> sau <strong>noduri</strong></li>
+		<li><strong>U</strong> este o mulțime finită de submulțimi cu două elemente din <strong>X</strong>, numite <strong>muchii</strong></li>
+	</ul>
+	<p>Vom nota în continuare vârfurile cu valori între <strong>1</strong> și <strong>n</strong>, unde <strong>n</strong> este numărul de vârfuri din graf, iar muchiile cu <strong>[x, y]</strong> sau <strong>(x, y)</strong>, unde <strong>x</strong> și <strong>y</strong> sunt vârfuri și se numesc <strong>extremitățile</strong> muchiei.</p>
+	<p>Un <strong>vecin</strong> al unui vârf <strong>x</strong> este orice vârf <strong>y</strong> cu proprietatea că există muchia <strong>[x, y]</strong>.</p>
+	<p>Două vârfuri între care există muchie se numesc <strong>adiacente</strong>.</p>
+	<p>Două muchii sunt <strong>incidente</strong> dacă au o o extremitate comună. Un vârf este <strong>incident</strong> cu o muchie dacă vârful este extremitate a acelei muchii.</p>
+	<p>Mulțimea muchiilor are proprietatea de simetrie: dacă <strong>[x, y]</strong> este muchie, atunci și <strong>[y, x]</strong> este muchie.</p>
+	<p>Conform definiției:</p>
+	<ul>
+		<li>într-un graf neorientat nu există muchie de la un vârf la el însuși</li>
+		<li>între două vârfuri distincte există cel mult o muchie</li>
+	</ul>
+	<p><strong>Exemplu: </strong>Fie <strong>G = (X, U)</strong>, unde:</p><br>
+	<ul>
+		<li><strong>X = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11}</strong></li>
+		<li><strong>U = {[1, 4], [1, 5], [2, 3], [2, 8], [3, 11], [4, 5], [4, 9], [7, 10], [8, 11]}</strong></li>
+	</ul><br>
+	<img src = "Pictures/Undirected_1.png" alt = "Undirected_1" width = "384" height = "185"><br>
+	<h2>Gradul unui vârf</h2>
+	<p><strong>Definiție: </strong>Într-un graf neorientat se numește <strong>grad</strong> al unui vârf numărul de vârful adiacente cu acesta (sau numărul de muchii incidente cu acesta). Gradul unui vărf <strong>x</strong> se notează <strong>d(x)</strong> (<em>degree</em>).</p>
+	<p><strong>Observații:</strong></p><br>
+	<ul>
+		<li>un vârf cu gradul <strong>0</strong> se numește <strong>izolat</strong>. În graful de mai sus, vârful <strong>6</strong> este izolat.</li>
+		<li>un vârf cu gradul <strong>1</strong> se numește <strong>terminal</strong>. În graful de mai sus, vârful <strong>9</strong> este vârf terminal.</li>
+		<li>gradul maxim al unui vârf într-un graf cu n vârfuri este <strong>n - 1</strong>.</li>
+	</ul>
+	<p><strong>Teoremă:</strong> Într-un graf neorientat, suma gradelor tuturor vârfurilor este dublul numărului de muchii.</p>
+	<p><strong>Consecințe:</strong></p>
+	<ul>
+		<li>Suma gradelor tuturor vârfurilor este număr par.</li>
+		<li>Într-un graf neorientat, numărul de vârfuri de grad impar este întotdeauna par.</li>
+	</ul><br>
+	<h2>Matricea de adiacență</h2>
+	<p>Pentru un graf neorientat <strong>G = (X, U)</strong> cu <strong>n</strong> vârfuri, matricea de adiacență este o matrice cu <strong>n</strong> linii și <strong>n</strong> coloane și elemente din <strong>{0, 1}</strong>, cu:</p><br>
+	<table>
+		<tr>
+			<td><img src = "Pictures/Undirected_2.png" alt = "Undirected_2" align = "left"></td>
+		</tr>
+	</table>
+	<p><strong>Exemplu: </strong>Pentru graful neorientat de mai jos avem următoarea matrice de adiacență:</p><br>
+	<table>
+		<tr>
+			<td><img src = Pictures/Undirected_3.png alt = "Undirected_3" width = "237" height = "139" style = "float: left; margin: 5px 50px 5px 5px;"></td>
+			<td><img src = Pictures/Undirected_4.png alt = "Undirected_4"></td>
+		</tr>
+	</table>
+	<p><strong>Observații: </strong></p><br>
+	<ul>
+		<li>matricea de adiacență este simetrică față de diagonala principală</li>
+		<li>elementele de pe diagonala principală sunt <strong>0</strong></li>
+		<li>gradul unui vârf <strong>x</strong> este egal cu numărul de elemente <strong>1</strong> de pe linia (sau coloana) <strong>x</strong></li>
+		<li>suma tuturor elementelor din matricea de adiacență a unui graf neorientat este egală cu dublul numărului de muchii din graf</li>
+	</ul><br>
+	<h2>Lista de muchii</h2>
+	<img src = Pictures/Undirected_3.png alt = "Undirected_3" width = "237" height = "139" style = "float: left; margin: 5px 50px 5px 5px;">
+	<p>Lista de muchii a unui graf neorientat reprezintă o mulțime ce conține toate muchiile din graf.</p>
+	<p>Pentru graful alăturat, lista de muchii este:</p><br>
+	<img src = Pictures/Undirected_5.png alt = "Undirected_5" width = "250" height = "30"><br>
+	<p>Pentru reprezentarea în memorie putem folosi:</p><br>
+	<ul>
+		<li>un tablou unidimensional cu elemente de tip <strong>struct {int I, J;}</strong></li>
+		<li>două tablouri unidimensionale cu elemente de tip <strong>int</strong></li>
+		<li>o listă alocată dinamic</li>
+		<li>etc</li>
+	</ul><br>
+	<h2>Liste de adiacențe (de vecini)</h2>
+	<img src = Pictures/Undirected_3.png alt = "Undirected_3" width = "237" height = "139" style = "float: left; margin: 5px 50px 5px 5px;">
+	<p>Pentru un graf neorientat cu <strong>G = (X, U)</strong> se va memora numărul de vârfuri <strong>n</strong> și apoi, pentru fiecare vârf <strong>x</strong>, lista vârfurilor adiacente cu <strong>x</strong>, adică a vârfurilor <strong>y</strong> cu proprietatea că există muchia <strong>[x, y]</strong>.</p><br><br>
+	<p>Pentru graful alăturat, listele de adiacență sunt:</p>
+	<pre><strong>
+1: 2 5
+2: 1 5
+3: vidă
+4: 5
+5: 1 2 4
+	</strong></pre>
+	<p>La reprezentarea în memorie trebui avut în vedere că dimensiunile listelor de vecini sunt variabile. De aceea, este neeficientă utilizarea unor tablouri alocate static. Astfel, putem folosi:</p><br>
+	<ul>
+		<li>un șir de <strong>n</strong> tablouri unidimensionale alocate dinamic</li>
+		<li>un șir de <strong>n</strong> vectori din STL</li>
+		<li>un șir de <strong>n</strong> liste simplu (dublu) înlănțuite alocate dinamic.</li>
+	</ul><br>
+	<h2>Graf parțial</h2>
+	<p><strong>Definiție: </strong>Fie <strong>G = (X, U)</strong> un graf neorientat. Se numeşte <strong>graf parțial</strong> al grafului <strong>G</strong>, graful neorientat <strong>G1 = (X, U1)</strong>, unde <strong>U1 ⊆ U</strong>.</p>
+	<p>Din definiție rezultă: </p><br>
+	<ul>
+		<li>Un graf parțial al unui graf neorientat <strong>G = (V, U)</strong>, are aceeaşi mulțime de vârfuri ca şi <strong>G</strong>, iar mulțimea muchiilor este o submulțime a lui <strong>U</strong> sau chiar <strong>U</strong>.</li>
+		<li>Fie <strong>G = (X, U)</strong> un graf neorientat. Un graf parțial al grafului <strong>G</strong> se obține păstrând vârfurile şi
+		eliminând eventual nişte muchii (se pot elimina şi toate muchiile sau chiar nici una).</li>
+	</ul>
+	<p><strong>Exemplu: </strong></p>
+	<img src = Pictures/Undirected_6.png alt = "Undirected_6" width = "232" height = "219" style = "float: left; margin: 5px 50px 5px 5px;">
+	<img src = Pictures/Undirected_7.png alt = "Undirected_7" width = "232" height = "219"><br>
+	<p style = "margin: 0px 0px 0px 150px;"> S-au eliminat muchiile <strong>[1, 2]</strong>, <strong>[3, 1]</strong></p><br>
+	<h2>Subgraf</h2>
+	<p><strong>Definiție: </strong>Fie <strong>G = (X, U)</strong> un graf neorientat. Se numeşte <strong>subgraf</strong> al grafului <strong>G</strong> graful neorientat <strong>G1 = (X1, U1)</strong> unde <strong>X1 ⊆ X</strong> iar <strong>U1</strong> conține toate arcele din <strong>U</strong> care au extremitățile în <strong>X1</strong>.</p>
+	<p>Din definiție rezultă:</p><br>
+	<ul>
+		<li>Fie <strong>G = (X, U)</strong> un graf neorientat. Un subgraf al grafului <strong>G</strong>, se obține ştergând eventual anumite
+		vârfuri şi odată cu acestea şi muchiile care le admit ca extremitate (nu se pot şterge toate vârfurile deoarece s-ar obține un graf cu mulțimea vârfurilor vidă).</li>
+	</ul>
+	<p><strong>Exemplu: </strong></p>
+	<img src = Pictures/Undirected_6.png alt = "Undirected_6" width = "232" height = "219" style = "float: left; margin: 5px 50px 5px 5px;"><br>
+	<img src = Pictures/Undirected_8.png alt = "Undirected_8" width = "232" height = "139"><br><br><br><br>
+	<p style = "margin: 0px 0px 0px 100px;">S-a eliminat vârfurile <strong>3 5</strong> și toate muchiile incidente cu ele.</p><br>
+	<h2>Graf complementar</h2>
+	<p><strong>Definiție: </strong>Fie <strong>G = (X, U)</strong> un graf neorientat. Se numeşte <strong>graf complementar</strong> al grafului G, graful neorientat <strong>G1 = (X, U1)</strong>, cu proprietatea că două vârfuri <strong>x</strong> și <strong>y</strong> sunt adiacente în <strong>G1</strong> dacă și numai dacă nu sunt adiacente în <strong>G</strong>.</p>
+	<p><strong>Exemplu: </strong></p>
+	<img src = Pictures/Undirected_6.png alt = "Undirected_6" width = "232" height = "219" style = "float: left; margin: 5px 50px 5px 5px;">
+	<img src = Pictures/Undirected_9.png alt = "Undirected_9" width = "232" height = "219">
+	<p style = "text-align: center;">O muchie <strong>[x, y]</strong> apare în graful complementar dacă și numai dacă nu apare în graful inițial.</p>
+	<p><strong>Observații: </strong>Un graf neorientat oarecare poate avea mai multe grafuri parțiale și subgrafuri, dar un unic graf complementar</p>
+	<p><strong>Teorema: </strong>Fie <strong>G</strong> un graf neorientat cu <strong>n</strong> vârfuri și <strong>m</strong> muchii. Atunci:</p>
+	<ul>
+		<li>graful <strong>G</strong> admite <strong>2<sup>m</sup></strong> grafuri parțiale</li>
+		<li>graful <strong>G</strong> admite <strong>2<sup>n</sup> – 1</strong> subgrafuri</li>
+		<li>graful <strong>G</strong> admite un unic graf complementar</li>
+	</ul><br>
+	<h2>Graf nul</h2>
+	<p><strong>Definiție: </strong>Un graf neorientat se numește <strong>graf nul</strong> dacă mulțimea muchiilor este vidă.</p>
+	<p>Într-un graf nul toate vârfurile sunt izolate.</p><br>
+	<h2>Graf complet</h2>
+	<p><strong>Definiție: </strong>Fie <strong>G = (X, U)</strong> un graf neorientat. Graful <strong>G</strong> se numește <strong>graf complet</strong> dacă oricare două vârfuri distincte ale sale sunt adiacente. Un graf complet cu <strong>n</strong> vârfuri se notează <strong>K<sub>n</sub></strong>.</p>
+	<p><strong>Exemplu: </strong>Graful următor este graful <strong>K<sub>5</sub></strong>.</p><br>
+	<table>
+		<tr>
+			<td><img src = Pictures/Undirected_10.png alt = "Undirected_10" width = "237" height = "181" align = "left"></td>
+		</tr>
+	</table><br>
+	<p style = "margin: 0px 0px 0px -2px;">Într-un graf complet cu <strong>n</strong> vârfuri sunt</p>
+	<img src = Pictures/Undirected_11.png alt = "Undirected_11" width = "100" height = "30" style = "float: left; margin: -25px 0px 0px 230px;">
+	<p style = "margin: -20px 0px 0px 0px;">muchii și fiecare vârf are gradul <strong>n-1</strong>.</p>
+	<p><strong>Propoziție: </strong>Sunt</p>
+	<img src = Pictures/Undirected_12.png alt = "Undirected_12" width = "59" height = "30" style = "float: left; margin: -30px 0px 0px 110px;">
+	<p style = "margin: -25px 0px 0px 175px;">grafuri neorientate distincte cu <strong>n</strong> vârfuri.</p><br>
+	<h2>Graf regulat</h2>
+	<p><strong>Definiție: </strong>Un graf în care toate nodurile au acelaşi grad se numește graf regulat.</p>
+	<p><strong>Exemplu: </strong>Graful de mai jos este regulat.</p><br>
+	<img src = Pictures/Undirected_13.png alt = "Undirected_13" width = "248" height = "166" style = "margin: 0px 0px 0px -10px;">
+	<h2>Graf bipartit</h2>
+	<p><strong>Definiţie: </strong>Un graf <strong>G = (X, U)</strong> se numește <strong>graf bipartit</strong> dacă există două mulţimi nevide <strong>A</strong> și <strong>B</strong> astfel încât <strong>X = A ∪ B</strong>, <strong>A ∩ B = ∅</strong> şi orice muchie <strong>u</strong> a lui <strong>G</strong> are o extremitate în <strong>A</strong> iar cealaltă în <strong>B</strong>. Mulţimile <strong>A</strong> şi <strong>B</strong> formează o partiţie a lui <strong>X</strong>.</p>
+	<p><strong>Exemplu: </strong>Graful următor este bipartit. <strong>A = {1, 2, 5, 7}</strong> și <strong>B = {3, 4, 6}</strong>.</p><br>
+	<img src = Pictures/Undirected_14.png alt = "Undirected_14" width = "312" height = "139" style = "margin: 0px 0px 0px -10px;"><br>
+	<h2>Graf bipartit complet</h2>
+	<p><strong>Definiție: </strong>Un graf bipartit <strong>G = (X, U)</strong> se numește <strong>bipartit complet</strong> dacă pentru oricare două vârfuri <strong>x ∈ A</strong> și <strong>y ∈ B</strong>, există în graf muchia <strong>[x, y]</strong>, adică <strong>[x, y] ∈ U</strong>.</p>
+	<p><strong>Exemplu: </strong>Graful următor este bipartit complet.</p><br>
+	<img src = Pictures/Undirected_15.png alt = "Undirected_15" width = "312" height = "139" style = "margin: 0px 0px 0px -10px;"><br>
+	<h2>Lanț. Ciclu</h2>
+	<p><strong>Definiție: </strong>Se numește <strong>lanț</strong> o succesiune de vârfuri <strong>L = [ x<sub>1</sub>, x<sub>2</sub>, ... x<sub>k</sub> ]</strong> cu proprietatea că oricare două vârfuri consecutive sunt adiacente.</p>
+	<p>Vârfurile <strong>x<sub>1</sub></strong> şi <strong>x<sub>k</sub></strong> se numesc extremitățile lanțului. Numărul <strong>k - 1</strong> se numește lungimea lanțului și este numărul de muchii din care este format.</p>
+	<p>Lanțul care conține numai vârfuri distincte, două câte două, este lanț <strong>elementar</strong>.</p>
+	<p>Lanțul care conține numai muchii distincte este <strong>lanț simplu</strong>. Dacă muchiile unui lanț nu sunt distincte se numește <strong>lanț compus</strong>.</p>
+	<p><strong>Definiție: </strong>Se numește <strong>ciclu</strong> un lanț simplu în care primul vârf este identic cu ultimul. Dacă toate vârfurile sunt distincte, mai puțin primul și ultimul, se numește <strong>ciclu elementar</strong>.</p>
+	<p><strong>Lungimea unui ciclu</strong> este egală cu numărul de muchii din ciclu. Lungimea minimă a unui ciclu este <strong>3</strong>.</p>
+	<p>Un ciclu se numește <strong>par</strong> dacă lungimea sa este pară, respectiv <strong>impar</strong> în caz contrar.</p>
+	<p>Un graf neorientat care nu conține niciun ciclu se numește <strong>aciclic</strong>.</p>
+	<p><strong>Exemple:</strong></p><br>
+	<img src = Pictures/Undirected_16.png alt = "Undirected_16" width = "386" height = "180" style = "margin: 0px 0px 0px -10px;"><br>
+	<ul>
+		<li><strong>[2, 4, 1, 3, 5, 7]</strong> este un lanț elementar</li>
+		<li><strong>[3, 5, 7, 6, 5, 1]</strong> este un lanț neelementar, dar simplu</li>
+		<li><strong>[2, 3, 5, 7, 6, 5, 3, 1]</strong> este un lanț compus</li>
+		<li><strong>[1, 5, 3, 2, 4, 1]</strong> este un ciclu elementar</li>
+		<li><strong>[1, 3, 5, 7, 6, 5, 1]</strong> este un ciclu neelementar</li>
+	</ul><br>
+	<h2>Graf conex</h2>
+	<p><strong>Definiție: </strong>Un graf neorientat se numește <strong>graf conex</strong> dacă pentru oricare două vârfuri <strong>x</strong> și <strong>y</strong> diferite ale sale, există cel puțin un lanț care le leagă, adică <strong>x</strong> este extremitatea inițială și <strong>y</strong> este extremitatea finală.</p>
+	<p>Un graf cu un singur nod este, prin definiție, conex.</p>
+	<p>Subgraful <strong>H</strong> este conex și maximal cu această proprietate (dacă s-ar mai adăuga un vârf nu ar mai fi conex)</p>
+	<p><strong>Exemple:</strong></p><br>
+	<img src = Pictures/Undirected_16.png alt = "Undirected_16" width = "386" height = "180" style = "margin: 0px 0px 0px -10px;"><br>
+	<h2>Componente conexe</h2>
+	<p><strong>Definiție: </strong>Se numește <strong>componentă conexă</strong> a unui graf <strong>G = (X, U)</strong> un subgraf <strong>H = (Y, V)</strong>, conex, al lui <strong>G</strong> care are proprietatea că nu există nici un lanț în G care să lege un vârf din <strong>Y</strong> cu un vârf din <strong>X – Y</strong>.</p>
+	<p>Un graf este conex dacă admite o singură componentă conexă.</p>
+	<p><strong>Exemple:</strong></p><br>
+	<img src = Pictures/Undirected_17.png alt = "Undirected_17" width = "496" height = "239" style = "margin: 0px 0px 0px -10px;"><br>
+	<p style = "margin: 0px 0px 0px 50px;">Graful următor nu este conex și are <strong>4</strong> componente conexe.</p><br>
+	<h2>Graf Biconex</h2>
+	<p><strong>Definiție: </strong>Un graf este <strong>biconex</strong> dacă este conex şi pentru orice vârf eliminat subgraful generat îşi păstrează proprietatea de conexitate.</p><br>
+	<h2>Arbore. Pădure</h2>
+	<p><strong>Definiție: </strong>Se numește <strong>arbore</strong> un graf conex și aciclic.</p>
+	<p><strong>Exemplu: </strong>Graful următor este arbore</p><br>
+	<img src = Pictures/Undirected_18.png alt = "Undirected_18" width = "252" height = "220" style = "margin: 0px 0px 0px -10px;">
+	<p><strong>Observații:</strong></p><br>
+	<ul>
+		<li>Un arbore cu <stong>n</stong> vârfuri are <strong>n - 1</strong> muchii.</li>
+		<li>Un arbore este un graf conex și minimal cu această proprietate. Dacă s-ar mai elimina o muchie, graful nu ar mai fi conex.</li>
+		<li>Un arbore este un graf aciclic și maximal cu această proprietate. Dacă s-ar mai adăuga o muchie, s-ar obține un ciclu.</li>
+	</ul>
+	<p>Un graf parțial care este arbore se numește <strong>arbore parțial</strong>.</p>
+	<p>Un graf care nu conține cicluri se mai numește <strong>pădure</strong>. Într-o pădure fiecare componentă conexă este arbore.</p><br>
+	<h2>Graf hamiltonian</h2>
+	<p><strong>Definiție: </strong>Se numește <strong>graf hamiltonian</strong> un graf care conține un <strong>ciclu hamiltonian</strong>. Se numește ciclu hamiltonian un ciclu elementar care conține toate vârfurile grafului.</p>
+	<p><strong>Exemplu: </strong>Graful următor este hamiltonian. Un ciclu hamiltonian este:</p>
+	<img src = Pictures/Undirected_19.png alt = "Undirected_19" width = "130" height = "20" style = "margin: -20px 0px 0px 435px;"><br>
+	<img src = Pictures/Undirected_20.png alt = "Undirected_20" width = "439" height = "199">
+	<p><strong>Teoremă: </strong>Un <strong>G</strong> un graf neorientat. Dacă are <strong>n ≥ 3</strong> vârfuri şi gradul oricărui vârf verifică inegalitatea <strong>d(x) ≥ n / 2</strong> atunci <strong>G</strong> este hamiltonian.</p><br>
+	<h2>Graf eulerian</h2>
+	<p><strong>Definiție: </strong>Se numește <strong>graf eulerian</strong> un graf care conține un <strong>ciclu eulerian</strong>. Se numește ciclu eulerian un ciclu care conține toate muchiile grafului.</p>
+	<p><strong>Exemplu: </strong>Graful următor este eulerian. Un ciclu eulerian este: </p>
+	<img src = Pictures/Undirected_21.png alt = "Undirected_21" width = "200" height = "20" style = "margin: -20px 0px 0px 400px;"><br>
+	<img src = Pictures/Undirected_20.png alt = "Undirected_20" width = "439" height = "199">
+	<p><strong>Teoremă: </strong>Un graf <strong>G = (X, U)</strong>, fără vârfuri izolate, este eulerian dacă şi numai dacă este conex şi
+	gradele tuturor vârfurilor sale sunt numere pare.</p>
+	</div>
+	<!-- end content -->
+	<div style = "clear: both;"> &nbsp; </div>
+	</div>
+	<div id = "bottom"></div>
+	<!-- end page -->
+	<!-- start footer -->
+	<div id = "footer"></div>
+	</div>
+	<!-- end footer -->
+</body>
+</html>

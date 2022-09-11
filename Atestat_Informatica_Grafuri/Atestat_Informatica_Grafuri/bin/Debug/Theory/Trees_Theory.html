@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset = UTF-8>
+	<title>Arbori</title>
+	<link href = "styles.css" rel = "stylesheet" type = "text/css">
+</head>
+<body>
+	<div id = "main">
+	<!-- start page -->
+	<div id = "top"></div>	
+	<div id = "page">
+	<!-- start content -->
+	<div id = "content">
+	<h2>Arbore liber</h2>
+	<p>Un arbore este un graf conex și aciclic. Se mai numește și <strong>arbore liber</strong>.</p>
+	<p>Următoarele propoziții sunt adevărate:</p><br>
+	<ul>
+		<li>Un arbore cu <strong>n</strong> vârfuri are <strong>n - 1</strong> muchii.</li>
+		<li>Un arbore este un graf conex și minimal cu această proprietate. Dacă s-ar mai elimina o muchie, graful nu ar mai fi conex.</li>
+		<li>Un arbore este un graf aciclic și maximal cu această proprietate. Dacă s-ar mai adăuga o muchie, s-ar obține un ciclu.</li>
+		<li>Între oricare două vârfuri ale unui arbore există un lanț elementar unic.</li>
+	</ul><br>
+	<img src = Pictures/Trees_1.png alt = "Trees_1"><br>
+	<h2>Arbori cu rădăcină</h2>
+	<p>Pentru un arbore se poate stabili un nod special, numit <strong>rădăcină</strong>. Putem spune că <em>agățăm</em> arborele în rădăcină, iar restul nodurilor cad.</p>
+	<p>Mai jos avem trei arbori cu rădăcină. Toți pornesc de la arborele de mai sus, dar diferă prin alegerea rădăcinii.</p><br>
+	<table>
+		<tr>
+			<td><img src = Pictures/Trees_2.png alt = "Trees_2" style = "margin: 0px 20px 0px 0px;"></td>
+			<td><img src = Pictures/Trees_3.png alt = "Trees_3" style = "margin: 0px 30px 0px 0px;"></td>
+			<td><img src = Pictures/Trees_4.png alt = "Trees_4" style = "margin: 0px 0px 0px 0px;"></td>
+		</tr>
+	</table><br>
+	<h2>Terminologie</h2>
+	<p>Fie un arbore cu rădăcina <strong>r</strong> și <strong>x</strong> un nod în acest arbore. Atunci:</p>
+	<ul>
+		<li>se numește <strong>ascendent</strong> al lui <strong>x</strong> orice nod <strong>y</strong>, diferite de <strong>x</strong>, aflat pe lanțul de la rădăcină la <strong>x</strong></li>
+		<ul>
+			<li>rădăcina nu are ascendenți</li>
+			<li>rădăcina este ascendent pentru toate nodurile din arbore</li>
+		</ul>
+		<li>dacă <strong>y</strong> este ascendent al lui <strong>x</strong> și există muchia <strong>(y, x)</strong>, atunci <strong>y</strong> se numește <strong>ascendent direct</strong> al lui <strong>x</strong> sau <strong>tatăl</strong> lui <strong>x</strong></li>
+		<ul>
+			<li>rădăcina este singurul nod din arbore care nu are tată</li>
+		</ul>
+		<li>un nod <strong>y</strong> este <strong>descendent</strong> al nodului <strong>x</strong>, diferit de <strong>y</strong>, dacă <strong>x</strong> aparține lanțului de la <strong>r</strong> la <strong>y</strong></li>
+		<ul>
+			<li>dacă în plus există muchia <strong>(x, y)</strong>, atunci <strong>y</strong> este <strong>descendent direct</strong> sau <strong>fiu</strong> al lui <strong>x</strong></li>
+			<li>un nod care nu are niciun descendent se numește <strong>frunză</strong></li>
+		</ul>
+		<li>două noduri care au același tată se numesc <strong>frați</strong></li>
+		<li>lungimea unui lanț de la rădăcina arborelui la un nod <strong>x</strong> reprezintă <strong>nivelul</strong> sau <strong>adâncimea</strong> nodului <strong>x</strong></li>
+		<li>lungimea maximă a unui lanț de la rădăcină la un nod al arborelui reprezintă <strong>înălțimea</strong> arborelui</li>
+		<li>un nod al arborelui împreună cu toți descendenții săi formează un <strong>subarbore</strong></li>
+	</ul>
+	<p><strong>Exemplu:</strong></p>
+	<img src = Pictures/Trees_5.png alt = "Trees_5"><br>
+	<ul>
+		<li>rădăcina arborelui este nodul <strong>3</strong></li>
+		<li>ascendenții nodului <strong>4</strong> sunt <strong>5</strong>, <strong>2</strong> și <strong>3</strong>. Ascendentul direct (tatăl) al nodului <strong>4</strong> este nodul <strong>5</strong></li>
+		<li>descendenții nodului <strong>2</strong> sunt <strong>1 7 10 5 4 6</strong>. Descendenții direcți ai nodului <strong>2</strong> sunt <strong>1 5</strong></li>
+		<li>nodurile <strong>1</strong> și <strong>5</strong> sunt frați</li>
+		<li>nodurile <strong>6 7 8 10 12</strong> sunt frunze</li>
+		<li>descompunerea pe niveluri:</li>
+		<ul>
+			<li>Nivelul <strong>0</strong> conține doar rădăcina: <strong>3</strong></li>
+			<li>Nivelul <strong>1</strong> conține nodurile <strong>2 9</strong></li>
+			<li>Nivelul <strong>2</strong> conține nodurile <strong>1 5 8 11</strong></li>
+			<li>Nivelul <strong>3</strong> conține nodurile <strong>7 10 4 12</strong></li>
+			<li>Nivelul <strong>4</strong> conține nodul <strong>6</strong></li>
+		</ul>
+		<li>Înălțimea arborelui este <strong>4</strong></li>
+		<li>Nodurile <strong>9 8 11 12</strong> formează un subarbore</li>
+	</ul><br>
+	<h2>Reprezentarea prin referințe descen</h2>
+	<p>Pentru fiecare nod al arborelui se memorează informații despre descendenții săi direcți. Este similară cu reprezentarea prin liste de adiacențe a grafurilor. Pentru arborele de mai sus avem:</p>
+	<ul>
+		<li><strong>F[1] = {7, 10}</strong></li>
+		<li><strong>F[2] = {1, 5}</strong></li>
+		<li><strong>F[3] = {2, 9}</strong></li>
+		<li><strong>F[4] = {6}</strong></li>
+		<li><strong>F[5] = {4}</strong></li>
+		<li><strong>F[6] = { }</strong></li>
+		<li><strong>F[7] = { }</strong></li>
+		<li><strong>F[8] = { }</strong></li>
+		<li><strong>F[9] = {8, 11}</strong></li>
+		<li><strong>F[10] = { }</strong></li>
+		<li><strong>F[11] = {12}</strong></li>
+		<li><strong>F[12] = { }</strong></li>
+	</ul><br>
+	<h2>Reprezentarea prin referințe ascen</h2>
+	<p>Pentru fiecare nod se memorează informații despre ascendenții direcți. Vom obține un <strong>vector de tați</strong>, în care:</p><br>
+	<ul>
+		<li><strong>T[r] = 0</strong>, unde <strong>r</strong> este rădăcina arborelui</li>
+		<li><strong>T[k] =</strong> tatăl nodului <strong>k</strong></li>
+	</ul>
+	<p>Pentru arborele de mai sus avem:</p>
+	<pre><strong>
+k:    1 2 3 4 5 6 7 8 9 10 11 12
+T[k]: 2 3 0 5 2 4 1 9 3 1 9 11 	
+	</strong></pre>
+	<p><strong>Observații:</strong></p>
+	<ul>
+		<li>În vectorul de tați există o singură valoare <strong>0</strong>, corespunzătoare rădăcinii</li>
+		<li>Frunzele corespund valorilor care nu apar în vectorul de tați</li>
+		<li>Vectorul de tați ne permite să determinăm lanțuri în arbore, de la un nod oarecare spre rădăcină:</li>
+		<ul>
+			<li>Pornim de la un nod dat <strong>x</strong></li>
+			<li>Identificăm tatăl lui <strong>x</strong>, <strong>y = T[x]</strong></li>
+			<li>Identificăm tatăl lui <strong>y</strong>, <strong>T[y]</strong></li>
+			<li>ș.a.m.d.</li>
+			<li>Ajungem într-un nod <strong>z</strong> pentru care <strong>T[z] = 0</strong>. Acesta va fi rădăcina și ne oprim.</li>
+		</ul>
+	</ul>
+	</div>
+	<!-- end content -->
+	<div style = "clear: both;"> &nbsp; </div>
+	</div>
+	<div id = "bottom"></div>
+	<!-- end page -->
+	<!-- start footer -->
+	<div id = "footer"></div>
+	</div>
+	<!-- end footer -->
+</body>
+</html>

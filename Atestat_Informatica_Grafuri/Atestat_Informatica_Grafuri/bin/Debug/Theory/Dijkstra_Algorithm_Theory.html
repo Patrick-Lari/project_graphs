@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset = UTF-8>
+	<title>Algoritmul lui Dijkstra</title>
+	<link href = "styles.css" rel = "stylesheet" type = "text/css">
+</head>
+<body>
+	<div id = "main">
+	<!-- start page -->
+	<div id = "top"></div>	
+	<div id = "page">
+	<!-- start content -->
+	<div id = "content">
+	<h2>Algoritmul lui Dijkstra</h2>
+	<p>Algoritmul lui Dijkstra determină pentru un nod dat într-un graf orientat cu costuri costurile minime ale drumurilor care au acel nod ca extremitate inițială.</p>
+	<p>Mai precis, pentru un nod <strong>s</strong>, algoritmul determină pentru orice nod <strong>x</strong> costul minim al unui drum de la <strong>s</strong> la <strong>x</strong>.</p>
+	<p>Strategia algoritmului lui Dijkstra este una de tip <strong>Greedy</strong>:</p><br>
+	<ul>
+		<li>se menține un tablou <strong>D</strong>, în care <strong>D[x]</strong> reprezintă costul minim curent (eventual infinit) al unui drum de la <strong>s</strong> la <strong>x</strong>;</li>
+		<li>se menține o mulțime <strong>F</strong> de noduri <strong>k</strong> pentru care s-a determinat costul minim final <strong>D[k]</strong></li>
+		<li>inițial în <strong>F</strong> se adaugă doar nodul <strong>s</strong>, pentru care <strong>D[s] = 0</strong>. Pentru nodurile <strong>x</strong> adiacente cu <strong>s</strong>, <strong>D[x] = C[s, x]</strong>, unde <strong>C[x, y]</strong> este costul arcului <strong>(x, y)</strong>, iar pentru celelalte noduri costul <strong>D[ ]</strong> se inițializează cu <strong>INFINIT</strong>;</li>
+		<li>în mod repetat:</li>
+		<ul>
+			<li>alegem un nod din afara mulțimii <strong>F</strong>, nodul <strong>k</strong> pentru care costul drumului <strong>D[k]</strong> este minim și finit;</li>
+			<li>adăugăm nodul găsit <strong>k</strong> în <strong>F</strong>;</li>
+			<li>pentru fiecare arc <strong>(k, x)</strong> cu <strong>x</strong> din afara mulțimii <strong>F</strong> stabilim dacă acest arc se îmbunătățește costul <strong>D[x]</strong> (arcul relaxează drumul);</li>
+			<img src = "Pictures/Weighted_3.png" alt = "Weighted_3" style = "float: left; margin: 5px 200px 5px 5px;">
+			<li>alegerea acestor noduri se termină când toate nodurile au fost adăugate în <strong>F</strong> (s-au determinat costurile drumurile de la <strong>s</strong> la fiecare nod al grafului) sau când nu mai există noduri <strong>x</strong> din afara mulțimii <strong>F</strong> pentru care <strong>D[x]</strong> este finit;</li>
+		</ul>
+	</ul>
+	<p><strong>Exemplu:</strong></p>
+	<p><strong>Pasul 0:</strong></p>
+	<img src = Pictures/Weighted_4.png alt = "Weighted_4"><br>
+	<p><strong>Pasul 1:</strong></p>
+	<img src = Pictures/Weighted_5.png alt = "Weighted_5"><br>
+	<p><strong>Pasul 2:</strong></p>
+	<img src = Pictures/Weighted_6.png alt = "Weighted_6"><br>
+	<p><strong>Pasul 3:</strong></p>
+	<img src = Pictures/Weighted_7.png alt = "Weighted_7"><br>
+	<p><strong>Pasul 4:</strong></p>
+	<img src = Pictures/Weighted_8.png alt = "Weighted_8"><br>
+	<p><strong>Pasul 5:</strong></p>
+	<img src = Pictures/Weighted_9.png alt = "Weighted_9"><br>
+	<h2>Implementare C++</h2><br>
+	<pre style = "margin: 0px 0px 0px 20px;">
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+ifstream fin("dijkstra.in");
+ofstream fout("dijkstra.out");
+
+using PI  = pair<int, int>;
+using VP  = vector<PI>;
+using VVP = vector<VP>;
+using VI  = vector<int>;
+
+const int inf = 0x3f3f3f3f;
+int n, p;
+VVP g;
+VI  d;
+
+void Read_Data();
+void Dijkstra(int x, VI& d);
+
+int main()
+{
+    Read_Data();
+    Dijkstra(p, d);
+    for (int i = 1; i <= n; ++i)
+    {
+        if (d[i] == inf)
+            fout << "-1 ";
+        else
+            fout << d[i] << " ";
+    }
+    return 0;
+}
+
+void Dijkstra(int x, VI& d)
+{
+    d = VI(n + 1, inf);
+    priority_queue&lt;PI, VP, greater&lt;PI>> q;
+    d[x] = 0;
+    q.push({0, x});
+    int y, dist, w;
+    while(!q.empty())
+    {
+        tie(dist, x) = q.top();
+        q.pop();
+        if (dist > d[x])
+            continue;
+        for (auto& p : g[x])
+        {
+            tie(y, w) = p;
+            if (d[y] > d[x] + w)
+            {
+                d[y] = d[x] + w;
+                q.push({d[y], y});
+            }
+        }
+    }
+}
+
+void Read_Data()
+{
+    fin >> n >> p;
+    int x, y, w;
+    g = VVP(n + 1);
+    while (fin >> x >> y >> w)
+        g[x].emplace_back(y, w);
+}
+	</div>
+	<!-- end content -->
+	<div style = "clear: both;"> &nbsp; </div>
+	</div>
+	<div id = "bottom"></div>
+	<!-- end page -->
+	<!-- start footer -->
+	<div id = "footer"></div>
+	</div>
+	<!-- end footer -->
+</body>
+</html>

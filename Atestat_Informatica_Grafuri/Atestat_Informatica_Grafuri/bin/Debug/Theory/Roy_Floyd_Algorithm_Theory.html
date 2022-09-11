@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset = UTF-8>
+	<title>Algoritmul lui Roy Floyd</title>
+	<link href = "styles.css" rel = "stylesheet" type = "text/css">
+</head>
+<body>
+	<div id = "main">
+	<!-- start page -->
+	<div id = "top"></div>	
+	<div id = "page">
+	<!-- start content -->
+	<div id = "content">
+	<h2>Algoritmul lui Roy Floyd</h2>
+	<p>Fie <strong>G = (V, U)</strong> un graf orientat ponderat în care fiecare arc are asociată o valoare reală numită pondere sau cost, de regulă pozitivă, cu noduri numerotate de la <strong>1</strong> la <strong>n</strong>.</p> 
+	<p>Se dorește determinarea pentru fiecare pereche de noduri <strong>x y</strong>, dacă există, a unui drum de cost minim, în care suma costurilor asociate arcelor care definesc drumul este minimă.</p>
+	<p>Algoritmul pornește <strong>matricea costurilor</strong>, <strong>A</strong>, în care:</p><br>
+	<img src = Pictures/Weighted_1.png alt = "Weighted_1" width = "400" height = "70">
+	<p>În reprezentarea în memorie, ∞ va fi înlocuit cu o valoare numerică mare. În C++, aceasta poate fi <strong>INF = 0x3F3F3F3F</strong>, având următoarele avantaje:</p><br>
+	<ul>
+		<li><strong>INF</strong> se reprezintă în tipul <strong>int</strong> (pe 32 de biți cu semn) și este mai mare decât <strong>1.000.000.000</strong></li>
+		<li>suma <strong>INF + INF</strong> nu depășește limita maximă a tipului <strong>int</strong>, deci nu va face overflow.</li>
+	</ul>
+	<p>Prin algoritmul Roy-Floyd matricea va fi transformată, astfel încât la final va avea următoarea semnificație:</p><br>
+	<img src = Pictures/Weighted_2.png alt = "Weighted_2" width = "500" height = "70"><br>
+	<h2>Implementare C++</h2><br>
+	<pre style = "margin: 0px 0px 0px 20px;">
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+ifstream fin("roy-floyd.in");
+ofstream fout("roy-floyd.out");
+
+const int inf = 0x3f3f3f3f;
+int A[101][101], n, m;
+
+void Read_Data();
+void Roy_Floyd();
+void Write_Data();
+
+int main()
+{
+    Read_Data();
+    Roy_Floyd();
+    Write_Data();
+    return 0;
+}
+
+void Roy_Floyd()
+{
+    for (int k = 1; k <= n; ++k)
+        for (int i = 1; i <= n; ++i)
+            for (int j = 1; j <= n; ++j)
+                if (A[i][j] > A[i][k] + A[k][j])
+                    A[i][j] = A[i][k] + A[k][j];
+}
+
+void Read_Data()
+{
+    fin >> n >> m;
+    for (int i = 1; i <= n; ++i)
+        for (int j = 1; j <= n; ++j)
+            if (i != j)
+                A[i][j] = inf;
+    while (m--)
+    {
+        int x, y, c;
+        fin >> x >> y >> c;
+        A[x][y] = c;
+    }
+}
+
+void Write_Data()
+{
+    for (int i = 1; i <= n; ++i)
+    {
+        for (int j = 1; j <= n; ++j)
+        {
+            if (A[i][j] != inf)
+                fout << A[i][j] << " ";
+            else
+                fout << -1 << " ";
+        }
+        fout << '\n';
+    }
+}
+	</pre>
+	</div>
+	<!-- end content -->
+	<div style = "clear: both;"> &nbsp; </div>
+	</div>
+	<div id = "bottom"></div>
+	<!-- end page -->
+	<!-- start footer -->
+	<div id = "footer"></div>
+	</div>
+	<!-- end footer -->
+</body>
+</html>

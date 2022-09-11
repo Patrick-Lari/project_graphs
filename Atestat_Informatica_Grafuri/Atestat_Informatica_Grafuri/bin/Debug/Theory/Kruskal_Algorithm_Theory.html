@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset = UTF-8>
+	<title>Algoritmul lui Kruskal</title>
+	<link href = "styles.css" rel = "stylesheet" type = "text/css">
+</head>
+<body>
+	<div id = "main">
+	<!-- start page -->
+	<div id = "top"></div>	
+	<div id = "page">
+	<!-- start content -->
+	<div id = "content">
+	<h2>Algoritmul lui Kruskal</h2>
+	<p>Considerăm un graf neorientat ponderat (cu costuri) conex <strong>G</strong>. Se numește <strong>arbore parțial</strong> un graf parțial al lui <strong>G</strong> care este arbore. Se numește <strong>arbore parțial de cost minim</strong> un arbore parțial pentru care suma costurilor muchiilor este minimă.</p>
+	<p>Dacă graful nu este conex, vorbim despre o <strong>pădure parțială de cost minim</strong>.</p>
+	<p><strong>Algoritmul lui Kruskal</strong> permite determinarea unui arbore parțial de cost minim (APM) într-un graf ponderat cu <strong>N</strong> noduri.</p>
+	<p>Pentru a determina <strong>APM</strong> - ul se pleacă de la o pădure formată din <strong>N</strong> subarbori. Fiecare nod al grafului reprezintă inițial un subarbore. Aceștia vor fi reuniți succesiv prin muchii, până când se obține un singur arbore (dacă graful este conex) sau până când acest lucru nu mai este posibil (dacă graful nu este conex).</p>
+	<p>Algoritmul este:</p><br>
+	<ul>
+		<li>se ordonează muchiile grafului crescător după cost</li>
+		<li>se analizează pe rând muchiile grafului, în ordinea crescătoare a costurilor</li>
+		<li>pentru fiecare muchie analizată:</li>
+		<ul>
+			<li>dacă extremitățile muchiei fac parte din același subarbore, muchia se ignoră</li>
+			<li>dacă extremitățile muchiei fac parte din subarbori diferiți, aceștia se vor reuni, iar muchia respectivă face parte din APM.</li>
+		</ul>
+	</ul>
+	<p><strong>Exemplu:</strong></p><br>
+	<p><strong>Pasul 0:</strong></p>
+	<img src = Pictures/Weighted_19.png alt = "Weighted_19"><br>
+	<p><strong>Pasul 1:</strong></p>
+	<img src = Pictures/Weighted_20.png alt = "Weighted_20"><br>
+	<p><strong>Pasul 2:</strong></p>
+	<img src = Pictures/Weighted_21.png alt = "Weighted_21"><br>
+	<p><strong>Pasul 3:</strong></p>
+	<img src = Pictures/Weighted_22.png alt = "Weighted_22"><br>
+	<p><strong>Pasul 4:</strong></p>
+	<img src = Pictures/Weighted_23.png alt = "Weighted_23"><br>
+	<p><strong>Pasul 5:</strong></p>
+	<img src = Pictures/Weighted_24.png alt = "Weighted_24"><br>
+	<p><strong>Pasul 6:</strong></p>
+	<img src = Pictures/Weighted_25.png alt = "Weighted_25"><br>
+	<p><strong>Pasul 7:</strong></p>
+	<img src = Pictures/Weighted_26.png alt = "Weighted_26"><br>
+	<p><strong>Pasul 8:</strong></p>
+	<img src = Pictures/Weighted_27.png alt = "Weighted_27"><br>
+	<p><strong>Pasul 9:</strong></p>
+	<img src = Pictures/Weighted_28.png alt = "Weighted_28"><br>
+	<p><strong>Pasul 10:</strong></p>
+	<img src = Pictures/Weighted_29.png alt = "Weighted_29"><br>
+	<p><strong>Pasul 11:</strong></p>
+	<img src = Pictures/Weighted_30.png alt = "Weighted_30"><br>
+	<p><strong>Pasul 12:</strong></p>
+	<img src = Pictures/Weighted_31.png alt = "Weighted_31"><br>
+	<p><strong>Pasul 13:</strong></p>
+	<img src = Pictures/Weighted_32.png alt = "Weighted_32"><br>
+	<p><strong>Pasul 14:</strong></p>
+	<img src = Pictures/Weighted_33.png alt = "Weighted_33"><br>
+	<h2>Implementare C++</h2><br>
+	<pre style = "margin: 0px 0px 0px 20px;">
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+ifstream fin("kruskal.in");
+ofstream fout("kruskal.out");
+
+struct muchie{
+    int x, y, c;
+};
+
+using VM = vector&lt;muchie>;
+using VI = vector&lt;int>;
+
+int n, m, cost;
+VM G, APM;
+VI T;
+
+void Read_Data();
+bool Comp(muchie a, muchie b);
+void Union(int x, int y);
+int Rad(int x);
+void Kruskal();
+void Write_Data();
+
+int main()
+{
+    Read_Data();
+    for (int i = 1; i <= n; ++i)
+        T[i] = i;
+    sort(G.begin(), G.end(), Comp);
+    Kruskal();
+    Write_Data();
+    return 0;
+}
+
+void Kruskal()
+{
+    int k = 0, c_1, c_2;
+    for (auto& i : G)
+    {
+        c_1 = Rad(i.x);
+        c_2 = Rad(i.y);
+        if (c_1 != c_2)
+        {
+            cost += i.c;
+            APM.push_back(i);
+            Union(c_1, c_2);
+            k++;
+            if (k == n - 1)
+                break;
+        }
+    }
+}
+
+void Union(int x, int y)
+{
+    T[x] = y;
+}
+
+int Rad(int x)
+{
+    if (T[x] == x)
+        return x;
+    else
+        T[x] = Rad(T[x]);
+}
+
+bool Comp(muchie a, muchie b)
+{
+    return a.c < b.c;
+}
+
+void Read_Data()
+{
+    fin >> n >> m;
+    T = vector&lt;int>(n + 1);
+    while (m--)
+    {
+        int i, j, c;
+        fin >> i >> j >> c;
+        G.push_back({i, j, c});
+    }
+}
+
+void Write_Data()
+{
+    fout << cost << '\n';
+    for (auto& i : APM)
+        fout << i.x << " " << i.y << '\n';
+}
+	</pre>
+	</div>
+	<!-- end content -->
+	<div style = "clear: both;"> &nbsp; </div>
+	</div>
+	<div id = "bottom"></div>
+	<!-- end page -->
+	<!-- start footer -->
+	<div id = "footer"></div>
+	</div>
+	<!-- end footer -->
+</body>
+</html>

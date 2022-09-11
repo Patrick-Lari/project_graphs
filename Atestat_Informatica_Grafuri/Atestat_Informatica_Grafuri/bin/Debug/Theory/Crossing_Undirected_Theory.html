@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset = UTF-8>
+	<title>Parcurgere Grafuri Neorientate</title>
+	<link href = "styles.css" rel = "stylesheet" type = "text/css">
+</head>
+<body>
+	<div id = "main">
+	<!-- start page -->
+	<div id = "top"></div>	
+	<div id = "page">
+	<!-- start content -->
+	<div id = "content">
+	<h2>Terminologie</h2>		
+	<p>Prin parcurgerea unui graf neorientat se înţelege examinarea în mod sistematic a vârfurilor, plecând dintr-un vârf dat <strong>start</strong>, astfel încât fiecare vârf accesibil din <strong>start</strong> pe muchii incidente două câte două să fie vizitat o singură dată. Trecerea de la un vârf <strong>x</strong> la altul se face prin examinarea, într-o anumită ordine a vecinilor săi.</p>
+	<p>Parcurgerile grafurilor sunt frecvent utilizate în rezolvarea multor probleme. Animația de mai jos prezintă modul în care se parcurge un labirint folosind mecanisul parcurgerii în adâncime:</p>
+	<img src = "Pictures/Undirected_22.gif" alt = "Undirected_22" height = "300"><br>
+	<h2>Parcurgerea în adâncime (DFS)</h2>
+	<p><strong>Parcurgerea în adâncime</strong> este foarte asemănătoare cu modul în care un turist vizitează un oraș în care sunt obiective turistice (<strong>vârfurile grafului</strong>) și căi de acces între obiective (<strong>muchiile</strong>). Vizitarea orașului va avea loc din aproape în aproape. Se pleacă de la un obiectiv de pornire, se continuă cu un obiectiv învecinat cu acesta, apoi unul învecinat cu al doilea, etc.</p>
+	<p><strong>Parcurgerea în adâncime</strong> se face astfel:</p>
+	<ul>
+		<li>Se începe cu un vârf inițial <strong>x</strong>, care este în acest moment <strong>vârf curent</strong>.</li>
+		<li>Vârful <strong>x</strong> se vizitează. Se determină primul său vecin nevizitat <strong>y</strong> al lui <strong>x</strong>, care devine vârf curent.</li>
+		<li>Apoi se vizitează primul vecin nevizitat al lui <strong>y</strong>, şi aşa mai departe, mergând în adâncime, până când ajungem la un vârf care nu mai are vecini nevizitați. Când ajungem într-un astfel de vârf, ne întoarcem la vârful din care am ajuns în acesta (<strong>părintele</strong>).</li>
+		<li>Dacă acest vârf mai are vecini nevizitați, alegem următorul vecin nevizitat al său și continuam parcurgerea în același mod.</li>
+		<li>Dacă nici acest vârf nu mai are vecini nevizitați, revenim în vârful său părinte și continuăm în același mod, până când toate vârfurile accesibile din vârful de start sunt vizitate.</li>
+	</ul>
+	<p><strong>Observație: </strong>Dacă graful nu este conex, nu se vor vizita toate vârfurile.</p>
+	<p><strong>Exemplu:</strong></p><br>
+	<table>
+		<tr>
+			<td><img src = "Pictures/Undirected_23.gif" alt = "Undirected_23" style = "float: left; margin: 5px 50px 5px 5px;"></td>
+		</tr>
+		<tr>
+			<td>Parcurgerea din nodul <strong>5: 5 2 1 4 6 3 7 8 9</strong></td>
+		</tr>
+	</table>
+	<p>Pentru implementarea algoritmului se foloseşte un vector caracteristic pentru memorarea faptului că un anume vârf a fost sau nu vizitat, la un anumit moment al parcurgerii:</p>
+	<ul>
+		<li><strong><code>V[i] = 0</code></strong>, vârful <strong>i</strong> nu a fost (încă) vizitat</li>
+		<li><strong><code>V[i] = 1</code></strong>, vârful <strong>i</strong> a fost vizitat</li>
+	</ul>
+	<p>Pentru a determina ordinea în care se parcurg nodurile care pot fi vizitate, se folosește o stivă: </p>
+	<ul>
+		<li>se analizează mereu nodurile adiacent cu nodul din vârful stivei</li>
+		<li>dacă pentru nodul din vârful stivei găsim un vecin nevizitat, adăugăm nodul vecin pe stivă</li>
+		<li>dacă pentru nodul din vârful stivei nu mai găsim niciun vecin nevizitat, îl eliminăm de pe stivă</li>
+	</ul><br>
+	<h2>Implementare C++</h2>
+	<pre>
+void DFS(int k)
+{
+    V[k] = 1; 
+    for (int i = 1; i <= n; ++i)
+    	if (A[k][i] == 1 && V[i] == 0)
+            DFS(i);
+}
+	</pre>
+	<h2>Arborele de parcurgere</h2>
+	<p>În urma parcurgerii în adâncime, muchiile folosite pentru parcurgere formează un arbore. Acest arbore este graf parțial al grafului dat (dacă graful este conex), și se numește <strong>arbore parțial de parcurgere</strong>. Arborii de parcurgere ai unui graf sunt diferiți, în funcție de vârful de start.</p>
+	<p><strong>Exemplu: </strong></p><br>
+	<table>
+		<tr>
+			<td>Arborele de parcurgere pentru vârful de start <strong>5</strong></td>
+		</tr>
+		<tr>
+			<td><img src = "Pictures/Undirected_24.png" alt = "Undirected_24" style = "float: left; margin: 5px 50px 5px 5px;"></td>
+		</tr>
+	</table><br>
+	<table>
+		<tr>
+			<td>Acest arbore poate fi privit ca arbore cu rădăcină, rădăcina fiind vârful de start. Pentru graful de mai sus, parcurgerea în adâncime pornind din vârful <strong>5</strong> produce următorul arbore de parcurgere:</td>
+		</tr>
+		<tr>
+			<td><img src = "Pictures/Undirected_25.png" alt = "Undirected_25" style = "float: left; margin: 5px 50px 5px 5px;"></td>
+		</tr>
+	</table>
+	<p>Acest arbore poate fi stocat în memorie prin intermediul unui vector de tați:</p>
+	<ul>
+		<li><strong><code>T[k] = 0</code></strong>, vârful <strong>k</strong> este rădăcina arborelui</li>
+		<li><strong><code>T[k] = x</code></strong>, vârful <strong>x</strong> este tatăl vârfului <strong>k</strong></li>
+	</ul>
+	<p>Pentru arborele de mai sus vectorul de tați este:</p>
+	<pre><strong>
+k:    1 2 3 4 5 6 7 8 9
+T[k]: 2 5 2 1 0 4 5 7 8	
+	</strong></pre>
+	<h2>Implementare C++</h2>
+	<pre>
+void DFS(int k, int tata)
+{
+    V[k] = 1; 
+    T[k] = tata;
+    for (int i = 1; i <= n; ++i)
+    	if (A[k][i] == 1 && V[i] == 0)
+    	    DFS(i, k);
+}
+	</pre>
+	<h2>Parcurgerea în lățime (BFS)</h2>
+	<p>Se parcurge vârful de start, apoi vecinii acestuia, apoi vecinii nevizitați ai acestora, până când sunt vizitate toate vârfurile accesibile. Practic, pentru a stabili ordinea de vizitare se folosește o coadă, iar pentru a stabili dacă un vârf a fost sau nu vizitat se foloseşte un vector caracteristic.</p>
+	<p>Algoritmul este:</p>
+	<ul>
+		<li>adaugăm în coadă vârful inițial și îl vizităm</li>
+		<li>cât timp coada este nevidă</li>
+		<ul>
+			<li>cât timp coada este nevidă </li>
+			<li>determinăm vecinii nevizitați ai vârfului extras, îi vizităm și îi adăugăm în coadă</li>
+			<li>eliminăm elementul din coadă</li>
+		</ul>	
+	</ul>
+	<p><strong>Observație: </strong>Dacă graful nu este conex, în urma parcurgerii nu se vor vizita toate vârfurile.</p>
+	<p><strong>Exemplu: </strong></p><br>
+	<img src = "Pictures/Undirected_26.gif" alt = "Undirected_26" style = "float: left; margin: 5px 50px 5px 5px;"><br><br><br>
+	<p>Vârfurile grafului au fost parcurse în ordinea:</p>
+	<p style = "margin: 0px 50px 5px 5px;"><strong>5 2 4 7 1 3 6 8 9</strong></p><br><br><br><br><br>	
+	<p>În urma parcurgerii în adâncime, muchiile folosite pentru parcurgere formează un arbore. Acest arbore este graf parțial al grafului dat (dacă graful este conex), și se numește <strong>arbore parțial de parcurgere</strong>. Pentru graful de mai sus, arborele de parcurgere pornind din vârful <strong>5</strong> este:</p><br>
+	<img src = "Pictures/Undirected_27.png" alt = "Undirected_27" style = "float: left; margin: 5px 50px 5px 5px;"><br><br><br><br><br><br><br><br><br><br>
+	<p>Acest arbore poate fi considerat arbore cu rădăcină, aceasta fiind chiar vârful de start, <strong>5</strong></p><br>
+	<img src = "Pictures/Undirected_28.png" alt = "Undirected_28" style = "float: left; margin: 5px 50px 5px 5px;"><br><br><br><br><br><br><br><br><br><br>
+	<p>În acest caz, odată cu parcurgerea se poate construi și vectorul de tați <strong><code>T[]</code></strong> al arborelui. În acest exemplu el este:</p>
+	<pre><strong>
+k:    1 2 3 4 5 6 7 8 9
+T[k]: 2 5 2 5 0 4 5 7 7
+	</pre></strong>
+	<p>Din vectorul de tați al unui arbore se poate determina ușor pentru un vârf oarecare un lanț de la acel vârf la rădăcina arborelui. Arborii obținuți în urma parcurgerii în lățime au proprietatea că lanțul de la vârful de pornire la oricare vârf accesibil din graf obținut din arborele de parcurgere are lungime minimă.</p><br>
+	<h2>Implementare C++</h2>
+	<pre>
+void BFS(int k)
+{
+    queue<int> Q;
+    Q.push(k);
+    while (!Q.empty())
+    {
+        k = Q.front();
+        T[k] = 1;
+        fout << k << " ";
+        Q.pop();
+        for (int i : G[k])
+            if (!T[i])
+            {
+                Q.push(i);
+                T[i] = 1;
+            }
+    }
+}
+	</pre>
+	</div>
+	<!-- end content -->
+	<div style = "clear: both;"> &nbsp; </div>
+	</div>
+	<div id = "bottom"></div>
+	<!-- end page -->
+	<!-- start footer -->
+	<div id = "footer"></div>
+	</div>
+	<!-- end footer -->
+</body>
+</html>

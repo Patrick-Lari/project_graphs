@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset = UTF-8>
+	<title>Algoritmul Plus-Minus</title>
+	<link href = "styles.css" rel = "stylesheet" type = "text/css">
+</head>
+<body>
+	<div id = "main">
+	<!-- start page -->
+	<div id = "top"></div>	
+	<div id = "page">
+	<!-- start content -->
+	<div id = "content">
+	<h2>Algoritmul Plus-Minus</h2>
+	<p>Pentru a determina componentele tare conexe folosim algoritmul numit <strong>Plus-Minus</strong>.</p>
+	<p>Pentru fiecare nod <strong>x</strong> al grafului care încă nu a fost plasat într-o componentă tare conexă:</p><br>
+	<ul>
+		<li>determinăm toate nodurile în care se poate ajunge din <strong>x</strong>, folosind graful <strong>G</strong> și le marcăm într-un tablou cu <strong>plus</strong></li>
+		<li>determinăm toate nodurile din care se poate ajunge în <strong>x</strong>, folosind graful <strong>GT</strong> și le marcăm într-un tablou cu <strong>minus</strong></li>
+		<li>nodurile marcate atât cu <strong>plus</strong>, cât și cu <strong>minus</strong>, împreună cu <strong>x</strong> formează o componentă tare conexă</li>
+	</ul>
+	<p><strong>Exemplu:</strong></p>
+	<p>Să determinăm componenta tare conexă din care face parte nodul <strong>6</strong>:</p>
+	<table>
+		<tr>
+			<td><img src = Pictures/Directed_15.png alt = "Directed_15" style = "float: left"></td>
+			<td><img src = Pictures/Directed_16.png alt = "Directed_16" style = "margin: 0px 0px 0px 50px;"></td>
+		</tr>
+		<tr>
+			<td>S-au marcat cu <strong>plus</strong> nodurile: <strong>5 7 8</strong></td>
+			<td style = "float: right">S-au marcat cu <strong>minus</strong> nodurile: <strong>1 2 3 4 5 7 8</strong></td>
+		</tr>
+	</table><br>
+	<p>Nodurile marcate de două ori, <strong>5 7 8</strong>, împreună cu nodul inițial, <strong>6</strong>, formează o componentă tare conexă.</p><br>
+	<h2>Implementare C++</h2><br>
+	<pre style = "margin: 0px 0px 0px 20px;">
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+int A[105][105], S[101], P[101], n, m, nrc;
+
+void Read_Data();
+void DFS(int x, int nrc);
+void DFP(int x, int nrc);
+void Solution();
+
+int main()
+{
+    Read_Data();
+    Solution();
+    return 0;
+}
+
+void Solution()
+{
+    for (int i = 1; i <= n; ++i)
+        if (!S[i])
+        {
+            nrc++;
+            DFS(i, nrc);
+            DFP(i, nrc);
+            for (int j = 1; j <= n; ++j)
+                if (S[j] != P[j])
+                    P[j] = S[j] = 0;
+        }
+    cout << nrc;/* << '\n';
+    for (int i = 1; i <= nrc; ++i)
+    {
+        for (int j = 1; j <= n; ++j)
+            if (S[j] == i)
+                fout << j << " ";
+        fout << '\n';
+    }*/
+}
+
+void DFS(int x, int nrc)
+{
+    S[x] = nrc;
+    for (int i = 1; i <= n; ++i)
+        if (!S[i] && A[x][i])
+            DFS(i, nrc);
+}
+
+void DFP(int x, int nrc)
+{
+    P[x] = nrc;
+    for (int i = 1; i <= n; ++i)
+        if (!P[i] && A[i][x])
+            DFP(i, nrc);
+}
+
+void Read_Data()
+{
+    cin >> n >> m;
+    while (m--)
+    {
+        int x, y;
+        cin >> x >> y;
+        A[x][y] = 1;
+    }
+}
+	</pre>
+	</div>
+	<!-- end content -->
+	<div style = "clear: both;"> &nbsp; </div>
+	</div>
+	<div id = "bottom"></div>
+	<!-- end page -->
+	<!-- start footer -->
+	<div id = "footer"></div>
+	</div>
+	<!-- end footer -->
+</body>
+</html>

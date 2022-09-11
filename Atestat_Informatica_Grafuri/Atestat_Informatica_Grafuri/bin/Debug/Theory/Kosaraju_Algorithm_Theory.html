@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset = UTF-8>
+	<title>Algoritmul lui Kosaraju</title>
+	<link href = "styles.css" rel = "stylesheet" type = "text/css">
+</head>
+<body>
+	<div id = "main">
+	<!-- start page -->
+	<div id = "top"></div>	
+	<div id = "page">
+	<!-- start content -->
+	<div id = "content">
+	<h2>Algoritmul lui Kosaraju</h2>
+	<p>Să ne amintim că la parcurgerea în adâncime se pot asocia nodurilor două momente de timp:</p>
+	<ul>
+		<li><strong>D[x]</strong> – momentul când nodul <strong>x</strong> este descoperit și adăugat pe stivă: <strong>timpul de descoperire</strong> a nodului</li>
+		<li><strong>F[x]</strong> – momentul când se termină de vizitat succesorii lui <strong>x</strong>, iar nodul <strong>x</strong> se elimină de pe stivă: <strong>timpul de finalizare</strong> a nodului</li>
+	</ul>
+	<p>Aceste momente de timp vor fi numere naturale între <strong>1</strong> și <strong>2 * n</strong>, unde <strong>n</strong> este numărul de noduri din graf.</p>
+	<p>Algoritmul lui Kosaraju este:</p>
+	<ul>
+		<li>determinăm graful transpus <strong>GT</strong></li>
+		<li>parcurgem în adâncime graful și determinăm pentru fiecare nod <strong>x</strong> timpul de finalizare <strong>f[x]</strong></li>
+		<li>parcurgem în adâncime graful transpus <strong>GT</strong>, dar considerăm nodurile în ordinea descrescătoarea timpilor de finalizare</li>
+		<li>nodurile din arborii de parcurgere obținuți reprezintă câte o componentă tare conexă</li>
+	</ul>
+	<p><strong>Exemplu:</strong></p>
+	<table>
+		<tr>
+			<td><img src = Pictures/Directed_13.png alt = "Directed_13" style = "float: left"></td>
+			<td><img src = Pictures/Directed_14.png alt = "Directed_14" style = "margin: 0px 0px 0px 50px;"></td>
+		</tr>
+	</table><br>
+	<p>În urma parcurgerii în adâncime a grafului inițial <strong>G</strong> nodurile în ordinea finalizării sunt:</p>
+	<img src = Pictures/Directed_17.png alt = "Directed_17"><br>
+	<p>Parcurgem graful transpus <strong>GT</strong> analizând nodurile în ordinea inversă a timpilor de finalizare:</p><br>
+	<ul>
+		<li>începem cu nodul <strong>1</strong>; se vizitează nodurile <strong>3 4</strong>; se determină componenta tare conexă <strong>{1, 3, 4}</strong>;</li>
+		<li>continuăm cu nodul <strong>2</strong> (nodurile <strong>1</strong>, <strong>3</strong> și <strong>4</strong> au fost vizitate mai devreme); nu se vizitează alte noduri; se determină componenta tare conexă <strong>{2}</strong>;</li>
+		<li>continuăm cu nodul <strong>5</strong>; se vizitează nodurile <strong>6 8 7</strong>; se determină componenta tare conexă <strong>{5, 6, 7, 8}</strong>.</li>
+	</ul><br>
+	<table>
+		<tr>
+			<td><img src = Pictures/Directed_18.png alt = "Directed_18" style = "float: left"></td>
+		</tr>
+	</table><br>
+	<h2>Implementare C++</h2><br>
+	<pre style = "margin: 0px 0px 0px 20px;">
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+struct muchie{
+    int a, b;
+};
+
+int A[101][101], S[101], P[101], n, m, nrc;
+vector&lt;muchie&gt; M;
+
+void Read_Data();
+void DFS(int x, int nrc);
+void DFP(int x, int nrc);
+void Solution();
+
+int main()
+{
+    Read_Data();
+    Solution();
+    return 0;
+}
+
+void Solution()
+{
+    for (int i = 1; i <= n; ++i)
+        if (!S[i])
+        {
+            nrc++;
+            DFS(i, nrc);
+            DFP(i, nrc);
+            for (int j = 1; j <= n; ++j)
+                if (S[j] != P[j])
+                    P[j] = S[j] = 0;
+        }
+    for (int i = 1; i <= n; ++i)
+        for (int j = 1; j <= n; ++j)
+            if (A[i][j] && S[i] != S[j])
+                M.push_back({i, j});
+    cout <&lt; M.size();/* << '\n';
+    for (int i = 0; i &lt; M.size(); ++i)
+        cout <&lt; M[i].a << " " <&lt; M[i].b << '\n';*/
+    return 0;
+}
+
+void DFS(int x, int nrc)
+{
+    S[x] = nrc;
+    for (int i = 1; i <= n; ++i)
+        if (!S[i] && A[x][i])
+            DFS(i, nrc);
+}
+
+void DFP(int x, int nrc)
+{
+    P[x] = nrc;
+    for (int i = 1; i <= n; ++i)
+        if (!P[i] && A[i][x])
+            DFP(i, nrc);
+}
+
+void Read_Data()
+{
+    cin >> n >> m;
+    while (m--)
+    {
+        int x, y;
+        cin >> x >> y;
+        A[x][y] = 1;
+    }
+}
+	</pre>
+	</div>
+	<!-- end content -->
+	<div style = "clear: both;"> &nbsp; </div>
+	</div>
+	<div id = "bottom"></div>
+	<!-- end page -->
+	<!-- start footer -->
+	<div id = "footer"></div>
+	</div>
+	<!-- end footer -->
+</body>
+</html>

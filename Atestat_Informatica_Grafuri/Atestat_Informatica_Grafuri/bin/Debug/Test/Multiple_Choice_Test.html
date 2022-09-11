@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset = UTF-8>
+	<title>Test Grilă</title>
+	<link href = "style.css" rel = "stylesheet">
+</head>
+<body>
+	<div class = "home-box custom-box">
+		<h3>Introducere:</h3>
+		<p>Numarul total de întrebări: <span class = "total-questions"></span></p>
+		<button type = "button" class = "button" onclick = "startQuiz()">Începe testul</button>
+	</div>
+	<div class = "quiz-box custom-box hide">
+		<div class = "question-number">
+		</div>
+		<div class = "question-text">
+		</div>
+		<div class = "option-container">
+		</div>
+		<div class = "next-question-button">
+			<button type = "button" class = "button" onclick = "next()">Următoarea</button>
+		</div>
+		<div class = "answers-indicator">
+		</div>		
+	</div>
+	<div class = "result-box custom-box hide">
+		<h1>Rezultatul Testului</h1>
+		<table>
+			<tr>
+				<td>Numărul de întrebări</td>
+				<td><span class = "total-questions"></span></td>
+			</tr>
+			<tr>
+				<td>Numărul de întrebări încercate</td>
+				<td><span class = "total-attempt"></span></td>
+			</tr>
+			<tr>
+				<td>Numărul de răspunsuri corecte</td>
+				<td><span class = "total-correct"></span></td>
+			</tr>
+			<tr>
+				<td>Numărul de răspunsuri greșite</td>
+				<td><span class = "total-wrong"></span></td>
+			</tr>
+			<tr>
+				<td>Procentajul</td>
+				<td><span class = "percentage"></span></td>
+			</tr>
+			<tr>
+				<td>Scorul tău total</td>
+				<td><span class = "total-score"></span></td>
+			</tr>
+		</table>
+		<button type = "button" class = "button" onclick = "tryAgainQuiz()">Încercă din nou</button>
+		<button type = "button" class = "button" onclick = "goToHome()">Acasă</button>
+	</div>
+	<script src = "Questions.js"></script>
+	<script src = "App.js"></script>
+</body>
+</html>

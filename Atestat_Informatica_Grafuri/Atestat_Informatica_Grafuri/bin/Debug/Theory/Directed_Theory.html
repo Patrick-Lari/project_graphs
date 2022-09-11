@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset = UTF-8>
+	<title>Teorie Grafuri Orientate</title>
+	<link href = "styles.css" rel = "stylesheet" type = "text/css">
+</head>
+<body>
+	<div id = "main">
+	<!-- start page -->
+	<div id = "top"></div>	
+	<div id = "page">
+	<!-- start content -->
+	<div id = "content">
+	<h2>Terminologie</h2>		
+	<p><strong>Definiție: </strong>Se numeşte <strong>graf orientat</strong> sau <strong>digraf</strong> o pereche ordonată de mulțimi notată <strong>G = (V, U)</strong>, unde:</p><br>
+	<ul>
+		<li><strong>V</strong> este o mulțime finită şi nevidă ale cărei elemente se numesc <strong>noduri</strong> sau <strong>vârfuri</strong></li>
+		<li><strong>U</strong> este o mulțime de perechi ordonate de elemente distincte din <strong>V</strong> ale cărei elemente se numesc <strong>arce</strong>.</li>
+	</ul>
+	<p><strong>Exemplu:</strong><br>
+	<br>
+	<table>
+		<tr>
+			<td><img src = "Pictures/Directed_1.png" alt = "Directed_1" align = "left"></td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
+					<li><strong>X = {1, 2, 3, 4, 5, 6}</strong></li>
+					<li><strong>U = {(1, 6), (2, 1), (2, 4), (3, 2), (4, 2), (5, 4), (6, 1), (6, 4)}</strong></li>
+				</ul>
+			</td>
+		</tr>
+	</table>
+	<p>Observăm că arcele <strong>(1, 6)</strong> și <strong>(6, 1)</strong> sunt distincte.</p>
+	<p><strong>Noțiuni</strong></p>
+	<ul>
+		<li><strong>extremități ale unui arc:</strong> pentru arcul <strong>u = (x, y)</strong>, se numesc <strong>extremități</strong> ale sale nodurile <strong>x</strong> şi <strong>y</strong></li>
+		<ul>
+			<li><strong>x</strong> se numeşte extremitate inițială</li>
+			<li><strong>y</strong> se numeşte extremitate finală</li>
+			<li><strong>y</strong> se numește <strong>succesor</strong> al lui <strong>x</strong></li>
+			<li><strong>x</strong> se numește <strong>predecesor</strong> al lui <strong>y</strong>.</li>
+		</ul>
+		<li><strong>vârfuri adiacente:</strong> dacă într-un graf există arcul <strong>u = (x, y)</strong> (sau <strong>u = (y, x)</strong>, sau amândouă), se spune despre nodurile <strong>x</strong> şi <strong>y</strong> că sunt adiacente</li>
+		<li><strong>incidență:</strong></li>
+		<ul>
+			<li>dacă <strong>u1</strong> şi <strong>u2</strong> sunt două arce ale aceluiaşi graf, se numesc incidente dacă au o extremitate comună. Exemplu: <strong>u1 = (x, y)</strong> şi <strong>u2 = (y, z)</strong> sunt incidente</li>
+			<li>dacă <strong>u1 = (x, y)</strong> este un arc într-un graf, se spune despre el şi nodul <strong>x</strong>, sau nodul <strong>y</strong>, că sunt incidente.</li>
+		</ul>
+	</ul><br>
+	<h2>Grade</h2>
+	<p><strong>Definiție: </strong>Fie <strong>G = (V, U)</strong> un graf orientat și <strong>x</strong> un nod al său.</p><br>
+	<ul>
+		<li>Se numeşte <strong>grad exterior</strong> al nodului <strong>x</strong>, numărul arcelor de forma <strong>(x, y)</strong> (adică numărul arcelor care ies din <strong>x</strong>), notat <strong>d<sup>+</sup>(x)</strong>.</li>
+		<li>Se numeşte <strong>grad interior</strong> al nodului <strong>x</strong>, numărul arcelor de forma <strong>(y, x)</strong> (adică numărul arcelor care intră în <strong>x</strong>), notat <strong>d<sup>-</sup>(x)</strong>.</li>
+	</ul>
+	<p><strong>Exemplu: </strong></p>
+	<table>
+		<tr>
+			<td><img src = "Pictures/Directed_1.png" alt = "Directed_1" align = "left"></td>
+		</tr>
+		<tr>
+			<td>Pentru graful dat avem:
+				<ul>
+					<li><strong>d<sup>+</sup>(2) = 2</strong></li>
+					<li><strong>d<sup>+</sup>(2) = 3</strong></li>
+				</ul>
+			</td>
+		</tr>
+	</table>
+	<p><strong>Teoremă: </strong>Într-un graf orientat, suma gradelor exterioare a tuturor nodurilor este egală cu suma gradelor interioare a tuturor nodurilor și cu numărul de arce.</p>
+	<p>Un nod <strong>x</strong> se numește <strong>izolat</strong> dacă <strong>d<sup>+</sup>(x) = d<sup>-</sup>(x) = 0</strong> (are gradul interior și gradul exterior egal cu <strong>0</strong>).</p><br>
+	<h2>Matricea de adiacență</h2>
+	<p>Fie <strong>G = (V, U)</strong> un graf orientat cu <strong>n</strong> noduri, în care nu există mai multe arce de la un nod la altul. Matricea de adiacență a grafului este o matrice cu <strong>n</strong> linii și <strong>n</strong> coloane și elemente <strong>0</strong> sau <strong>1</strong>, astfel:</p>
+	<table>
+		<tr>
+			<td><img src = "Pictures/Directed_2.png" alt = "Directed_2" align = "left"></td>
+		</tr>
+	</table>
+	<table>
+		<tr>
+			<td><img src = Pictures/Directed_1.png alt = "Directed_1" style = "float: left; margin: 5px 50px 5px 5px;"></td>
+			<td><img src = Pictures/Directed_3.png alt = "Directed_3"></td>
+		</tr>
+	</table>
+	<p><strong>Observații: </strong></p>
+	<ul>
+		<li>matricea de adiacență are zerouri pe diagonală (dacă în graf nu avem bucle) </li>
+		<li>matricea de adiacență nu este simetrică față de diagonala principală</li>
+	</ul><br>
+	<h2>Lista de arce</h2>
+	<img src = Pictures/Directed_1.png alt = "Directed_1" style = "float: left; margin: 5px 50px 5px 5px;">
+	<p>Lista de arce a unui graf orientat reprezintă o mulțime (familie, dacă arcele se pot repeta) ce conține toate arcele din graf.</p>
+	<p>Pentru graful alăturat, lista de arce este: </p>
+	<img src = Pictures/Directed_4.png alt = "Directed_4" width = "350" height = "20" style = "float: right; margin: -160px -25px 0px 0px;"><br>
+	<p>Pentru reprezentarea în memorie putem folosi:</p><br>
+	<ul>
+		<li>un tablou unidimensional cu elemente de tip <strong>struct {int I, J;}</strong></li>
+		<li>două tablouri unidimensionale cu elemente de tip <strong>int</strong></li>
+		<li>o listă alocată dinamic</li>
+		<li>etc</li>
+	</ul><br>
+	<h2>Listele de adiacență</h2>
+	<p>Pentru un graf orientat cu <strong>G = (V, U)</strong> se va memora numărul de noduri <strong>n</strong> și apoi, pentru fiecare nod <strong>x</strong>, lista succesorilor lui <strong>x</strong>, adică nodurilor <strong>y</strong> cu proprietatea că există arcul <strong>(x, y)</strong>.</p>
+	<img src = Pictures/Directed_1.png alt = "Directed_1" style = "float: left; margin: 5px 50px 5px 5px;">
+	<p>Pentru graful alăturat, listele de adiacență sunt:</p>
+	<pre><strong>
+1: 6
+2: 1 4
+3: 2
+4: 2
+5: 4
+6: 1 2 4
+	</strong></pre><br><br><br>
+	<p>La reprezentarea în memorie trebui avut în vedere că dimensiunile listelor de succesori sunt variabile. De aceea, este neeficientă utilizarea unor tablouri alocate static. Astfel, putem folosi:</p><br>
+	<ul>
+		<li>un șir de <strong>n</strong> tablouri unidimensionale alocate dinamic</li>
+		<li>un șir de <strong>n</strong> vectori din STL</li>
+		<li>un șir de <strong>n</strong> liste simplu (dublu) înlănțuite alocate dinamic.</li>
+	</ul><br>
+	<h2>Graf parțial</h2>
+	<p><strong>Definiție: </strong>Fie <strong>G = (V, U)</strong> un graf orientat. Se numeşte graf parțial al grafului <strong>G</strong>, graful orientat <strong>G1 = (V, U1)</strong>, unde <strong>U1 ⊆ U</strong>.</p>
+	<p>Din definiție rezultă: </p><br>
+	<ul>
+		<li>Un graf parțial al unui graf orientat <strong>G = (V, U)</strong>, are aceeaşi mulțime de vârfuri ca şi <strong>G</strong>, iar mulțimea arcelor este o submulțime a lui <strong>U</strong> sau chiar <strong>U</strong>.</li>
+		<li>Fie <strong>G = (V, U)</strong> un graf orientat. Un graf parțial al grafului <strong>G</strong>, se obține păstrând vârfurile şi eliminând eventual nişte arce (se pot elimina şi toate arcele sau chiar nici unul).</li>
+	</ul>
+	<p><strong>Exemplu: </strong></p>
+	<img src = Pictures/Directed_1.png alt = "Directed_1" style = "float: left; margin: 5px 50px 5px 5px;">
+	<img src = Pictures/Directed_5.png alt = "Directed_5"><br>
+	<p style = "margin: 0px 0px 0px 150px;">S-au eliminat arcele <strong>(1, 6)</strong>, <strong>(3, 2)</strong>, <strong>(6, 4)</strong></p><br>
+	<h2>Subgraf</h2>
+	<p><strong>Definiție: </strong>Fie <strong>G = (V, U)</strong> un graf orientat. Se numeşte subgraf al grafului <strong>G</strong> graful orientat <strong>G1 = (V1, U1)</strong> unde <strong>V1 ⊆ V</strong> iar <strong>U1</strong> conține toate arcele din <strong>U</strong> care au extremitățile în <strong>V1</strong>.</p>
+	<p>Din definiție rezultă: </p><br>
+	<ul>
+		<li>Fie <strong>G = (V, U)</strong> un graf orientat. Un subgraf al grafului <strong>G</strong>, se obține ştergând eventual anumite vârfuri şi odată cu acestea şi arcele care le admit ca extremitate (nu se pot şterge toate vârfurile deoarece s-ar obține un graf cu mulțimea vârfurilor vidă).</li>
+	</ul>
+	<p><strong>Exemplu: </strong></p>
+	<img src = Pictures/Directed_1.png alt = "Directed_1" style = "float: left; margin: 5px 50px 5px 5px;"><br>
+	<img src = Pictures/Directed_6.png alt = "Directed_6"><br>
+	<p style = "margin: 0px 0px 0px 100px;">S-a eliminat nodul <strong>6</strong> și toate arcele incidente cu el.</p><br>
+	<h2>Graf complet</h2>
+	<p><strong>Definiție: </strong>Fie <strong>G = (V, U)</strong> un graf orientat. Graful <strong>G</strong> se numește <strong>graf complet</strong> dacă oricare două vârfuri distincte ale sale sunt adiacente.</p>
+	<p>Două vârfuri <strong>x</strong> și <strong>y</strong> sunt adiacente dacă:</p><br>
+	<ul>
+		<li>între ele există arcul <strong>(x, y)</strong>, sau</li>
+		<li>între ele există arcul <strong>(y, x)</strong>, sau</li>
+		<li>între ele există arcele <strong>(x, y)</strong> şi <strong>(y, x)</strong>.</li>
+	</ul>
+	<p><strong>Exemplu: </strong></p>
+	<table>
+		<tr>
+			<td><img src = Pictures/Directed_7.png alt = "Directed_7" style = "float: left;"></td>
+		</tr>
+		<tr>
+			<td><p style = "float: left; margin: 10px 0px 0px 0px;"><strong>Teoremă: </strong>Numărul de grafuri orientate complete cu <strong>n</strong> noduri este</p></td>
+			<td><img src = Pictures/Directed_8.png alt = "Directed_8" width = "59" height = "30" style = "float: left; margin: 0px 0px 0px 5px;">
+		</tr>
+	</table><br>
+	<h2>Graf turneu</h2>
+	<p><strong>Definiție: </strong>Un graf orientat este <strong>turneu</strong>, dacă oricare ar fi două vârfuri <strong>i</strong> şi <strong>j</strong>, <strong>i ≠ j</strong>, între ele există un singur arc: arcul <strong>(i, j)</strong> sau arcul <strong>(j, i)</strong>.</p>
+	<p><strong>Exemplu: </strong></p>
+	<table>
+		<tr>
+			<td><img src = Pictures/Directed_9.png alt = "Directed_9" style = "float: left;"></td>
+		</tr>
+		<tr>
+			<td><strong>Proprietăți: </strong></td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
+					<li>Orice graf turneu este graf complet.</li>
+					<li style = "margin: 10px 0px 0px 0px;">Avem <img src = Pictures/Undirected_12.png alt = "Undirected_12" width = "59" height = "30" style = "margin: -30px 0px 0px 45px;"> <p style = "margin: -22px 0px 0px 110px;">grafuri turneu cu <strong>n</strong> noduri.</p></li>
+					<li>În orice graf turneu există un drum elementar care trece prin toate vârfurile grafului.</li>
+				</ul>
+			</td>
+		</tr>
+	</table><br>
+	<h2>Lanț. Drum</h2>
+	<p><strong>Definiție: </strong>Fie <strong>G = (V, U)</strong> un graf orientat. Se numește <strong>lanț</strong>, în graful <strong>G</strong>, o succesiune de arce, notată <strong>L = ( u<sub>1</sub>, u<sub>2</sub>, ... u<sub>k</sub> )</strong> cu proprietatea ca oricare două arce consecutive au o extremitate comună (nu are importanță orientarea arcelor).</p>
+	<p>Lungimea unui lanț este egală cu numărul de arce din care este alcătuit.</p>
+	<p>Primul nod și ultimul nod dintr-un lanț formează extremitățile lanțului.</p>
+	<p><strong>Definiție: </strong>Fie <strong>G = (V, U)</strong> un graf orientat. Se numește <strong>drum</strong> în graful <strong>G</strong> o succesiune de noduri, notată <strong>D = ( x<sub>1</sub>, x<sub>2</sub>, ... x<sub>k</sub> )</strong>, cu proprietatea că pentru orice <strong>1 ≤ i < k</strong>, (<strong>x<sub>i</sub>, x<sub>i + 1</sub></strong>) este arc în <strong>G</strong>.</p>
+	<p><strong>Lungimea unui drum</strong> este egală cu numărul de arce din care este alcătuit.</p>
+	<p>Pentru un drum <strong>D = ( x<sub>1</sub>, x<sub>2</sub>, ... x<sub>k</sub> )</strong>, nodurile <strong>x<sub>1</sub></strong> și <strong>x<sub>k</sub></strong> reprezintă extremitățile: inițială, respectiv finală.</p>
+	<p>Un lanț (drum) se numește <strong>elementar</strong> dacă în el nu se repetă noduri.</p> 
+	<p>Un lanț (drum) se numește <strong>simplu</strong> dacă în el nu se repetă arce.</p><br>
+	<p><strong>Exemple:</strong></p>
+	<img src = Pictures/Directed_1.png alt = "Directed_1" style = "float: left; margin: 5px 50px 5px 5px;">
+	<p>În graful alăturat:</p>
+	<p><strong>L = (5, 4, 2, 6, 1)</strong> este un lanț elementar, dar nu este drum.</p>
+	<p><strong>D = (3, 2, 1, 6, 4)</strong> este drum elementar.</p>
+	<p><strong>D = (3, 2, 1, 6, 2, 4)</strong> este drum neelementar, dar simplu.</p><br><br><br><br><br><br>
+	<h2>Circuit</h2>
+	<p><strong>Definiție: </strong>Se numește <strong>circuit</strong> un drum simplu în care extremitatea inițială și finală sunt egale. Se numește <strong>circuit elementar</strong> un circuit în care, cu excepția extremităților, nu se repetă noduri.</p>
+	<p>Lungimea unui circuit este reprezentată de numărul de arce din care acesta este alcătuit.</p>
+	<p><strong>Exemple: </strong></p>
+	<img src = Pictures/Directed_1.png alt = "Directed_1" style = "float: left; margin: 5px 50px 5px 5px;"><br><br><br><br><br><br>
+	<p>În graful alăturat: <strong>(1, 6, 2, 1)</strong> și <strong>(1, 6, 4, 2, 1)</strong> sunt circuite elementare.</p><br><br><br><br><br><br>
+	<h2>Conexitate. Tare conexitate</h2>
+	<p><strong>Definiție: </strong>Fie <strong>G = (V, U)</strong> un graf orientat. Graful se numește <strong>tare conex</strong> dacă între oricare două noduri distincte există cel puțin un <strong>drum</strong>.</p>
+	<p><strong>Definiție: </strong>Fie <strong>G = (V, U)</strong> un graf orientat. Se numește <strong>componentă tare conexă</strong> un subgraf tare conex și maximal cu această calitate (dacă am mai adauga un nod, n-ar mai fi tare conex).</p>
+	<p><strong>Exemplu:</strong></p>
+	<img src = Pictures/Directed_10.png alt = "Directed_10" style = "float: left; margin: 5px 50px 5px 5px;">
+	<p>Graful de mai sus nu este tare conex. El conține trei componente tare conexe:</p>
+	<ul style = "float: left; margin: 0px 0px 0px 15px;"><strong>
+		<li>1 3 4</li>
+		<li>2</li>
+		<li>5 6 7 8</li>
+	</strong></ul><br><br><br>
+	<p><strong>Observație: </strong>Un nod al grafului face parte dintr-o singură componentă tare conexă. Dacă ar face parte din două componente tare conexe, ele s-ar <strong>reuni</strong> prin intermediul acelui nod.</p><br>
+	<h2>Graf hamiltonian</h2>
+	<p><strong>Definiții: </strong>Fie un graf orientat <strong>G = (V, U)</strong>.</p>
+	<p>Un drum elementar care conține toate nodurile grafului se numește <strong>drum hamiltonian</strong>.</p>
+	<p>Un circuit elementar care conține toate nodurile grafului se numește <strong>circuit hamiltonian</strong>.</p>
+	<p>Un graf care conține un circuit hamiltonian se numește <strong>graf hamiltonian</strong>.</p>
+	<p><strong>Exemplu: </strong>Graful orientat de mai jos este hamiltonian</p>
+	<table>
+		<tr>
+			<td><img src = Pictures/Directed_11.png alt = "Directed_11" style = "float: left; margin: 5px 50px 5px 5px;"></td>
+		</tr>
+	</table>
+	<h2>Graf eulerian</h2>
+	<p><strong>Definiții: </strong>Fie un graf orientat <strong>G = (V, U)</strong>.</p>
+	<p>Un drum care conține toate arcele grafului se numește <strong>drum eulerian</strong>.</p>
+	<p>Un circuit care conține toate arcele grafului se numește <strong>circuit eulerian</strong>.</p>
+	<p>Un graf care conține un circuit eulerian se numește <strong>graf eulerian</strong>.</p>
+	<p><strong>Teoremă: </strong>Un graf fără noduri izolate este eulerian dacă și numai dacă este conex și pentru fiecare nod, gradul interior este egal cu cel exterior.</p>
+	<p><strong>Exemplu: </strong>Graful orientat de mai jos este eulerian.</p>
+	<table>
+		<tr>
+			<td><img src = Pictures/Directed_12.png alt = "Directed_12" style = "float: left; margin: 5px 50px 5px 5px;"></td>
+		</tr>
+	</table>
+	<h2>Graf transpus</h2>
+	<p><strong>Definiție: </strong>Fie <strong>G = (V, E)</strong> un graf orientat. Se numește <strong>graf transpus al lui G</strong> graful orientat <strong>GT = (V, ET)</strong>, cu aceleași mulțimea a nodurilor și pentru orice pereche de noduri are loc: <strong>(x, y)</strong> este arc în <strong>G</strong> dacă și numai dacă <strong>(y, x)</strong> este arc în <strong>GT</strong>.</p><br>
+	<img src = Pictures/Directed_13.png alt = "Directed_13" style = "float: left; margin: 5px 50px 5px 5px;">
+	<img src = Pictures/Directed_14.png alt = "Directed_14" style = "float: right; margin: 5px 0px 0px 0px;">
+	</div>
+	<!-- end content -->
+	<div style = "clear: both;"> &nbsp; </div>
+	</div>
+	<div id = "bottom"></div>
+	<!-- end page -->
+	<!-- start footer -->
+	<div id = "footer"></div>
+	</div>
+	<!-- end footer -->
+</body>
+</html>

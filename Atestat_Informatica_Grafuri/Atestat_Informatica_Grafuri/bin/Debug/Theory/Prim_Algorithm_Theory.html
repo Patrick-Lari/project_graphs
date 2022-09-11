@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset = UTF-8>
+	<title>Algoritmul lui Prim</title>
+	<link href = "styles.css" rel = "stylesheet" type = "text/css">
+</head>
+<body>
+	<div id = "main">
+	<!-- start page -->
+	<div id = "top"></div>	
+	<div id = "page">
+	<!-- start content -->
+	<div id = "content">
+	<h2>Algoritmul lui Prim</h2>
+	<p>Considerăm un graf neorientat ponderat (cu costuri) conex <strong>G</strong>. Se numește <strong>arbore parțial</strong> un graf parțial al lui <strong>G</strong> care este arbore. Se numește <strong>arbore parțial de cost minim</strong> un arbore parțial pentru care suma costurilor muchiilor este minimă.</p>
+	<p>Dacă graful nu este conex, vorbim despre o <strong>pădure parțială de cost minim</strong>.</p>
+	<p><strong>Algoritmul lui Prim</strong> permite determinarea unui arbore parțial de cost minim (APM) într-un graf ponderat cu <strong>N</strong> noduri.</p>
+	<p>Determinarea <strong>APM</strong> - ului se face astfel:</p><br>
+	<ul>
+		<li>se stabilește un nod de plecare. Acesta va fi rădăcina arborelui, care se va crea pas cu pas, prin adăugarea de noi noduri</li>
+		<li>în mod repetat:</li>
+		<ul>
+			<li>se alege un nod neadăugat încă în arborele curent pentru care muchia dintre el și un nod din arbore are cost minim</li>
+			<li>se adăugă nodul în arbore</li>
+		</ul>
+		<li>când nu se mai poate face alegerea unui asemenea nod, fie au fost adăugate toate nodurile, fie graful nu este conex și au fost adăugate în arbore toate nodurile din componenta conexă a nodul inițial</li>
+		<li>dacă graful nu este conex, continuăm cu următoarea componentă conexă</li>
+	</ul>
+	<p><strong>Observație</strong>: Arborele parțial de cost minim al unui graf neorientat nu este unic, însă toate APM-urile vor avea același cost.</p>
+	<p><strong>Exemplu:</strong></p>
+	<p><strong>Pasul 0:</strong></p>
+	<img src = Pictures/Weighted_10.png alt = "Weighted_10"><br>
+	<p><strong>Pasul 1:</strong></p>
+	<img src = Pictures/Weighted_11.png alt = "Weighted_11"><br>
+	<p><strong>Pasul 2:</strong></p>
+	<img src = Pictures/Weighted_12.png alt = "Weighted_12"><br>
+	<p><strong>Pasul 3:</strong></p>
+	<img src = Pictures/Weighted_13.png alt = "Weighted_13"><br>
+	<p><strong>Pasul 4:</strong></p>
+	<img src = Pictures/Weighted_14.png alt = "Weighted_14"><br>
+	<p><strong>Pasul 5:</strong></p>
+	<img src = Pictures/Weighted_15.png alt = "Weighted_15"><br>
+	<p><strong>Pasul 6:</strong></p>
+	<img src = Pictures/Weighted_16.png alt = "Weighted_16"><br>
+	<p><strong>Pasul 7:</strong></p>
+	<img src = Pictures/Weighted_17.png alt = "Weighted_17"><br>
+	<p><strong>Pasul 8:</strong></p>
+	<img src = Pictures/Weighted_18.png alt = "Weighted_18"><br>
+	<h2>Implementare C++</h2><br>
+	<pre style = "margin: 0px 0px 0px 20px;">
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+ifstream fin("prim.in");
+ofstream fout("prim.out");
+
+using PI = pair&lt;int, int>;
+using VP = vector&lt;PI>;
+using VI = vector&lt;int>;
+using VB = vector&lt;bool>;
+
+VP G[101];
+VI D, T;
+VB V;
+const int inf = 0x3f3f3f3f;
+int n, m, x, y, c, s_f;
+
+void Read_Data();
+void Prim();
+void Write_Data();
+
+int main()
+{
+    Read_Data();
+    Prim();
+    Write_Data();
+    return 0;
+}
+
+void Prim()
+{
+    priority_queue&lt;PI, VP, greater<PI>> Q;
+    V.resize(n + 1, false);
+    D.resize(n + 1, inf);
+    T.resize(n + 1, 0);
+    V[1] = 1;
+    T[1] = 0;
+    D[1] = 0;
+    for (auto& x : G[1])
+    {
+        T[x.second] = 1;
+        D[x.second] = x.first;
+        Q.push(x);
+    }
+    int s = 0;
+    for (int i = 1; i < n; ++i)
+    {
+        PI P;
+        do
+        {
+            P = Q.top();
+            Q.pop();
+        }while(V[P.second]);
+        s += P.first;
+        int node = P.second;
+        V[node] = 1;
+        for (auto& i : G[node])
+            if (!V[i.second] && D[i.second] > i.first)
+            {
+                D[i.second] = i.first;
+                T[i.second] = node;
+                Q.push(i);
+            }
+        s_f = s;
+    }
+}
+
+void Read_Data()
+{
+    fin >> n >> m;
+    while (m--)
+    {
+        fin >> x >> y >> c;
+        G[x].push_back({c, y});
+        G[y].push_back({c, x});
+    }
+}
+
+void Write_Data()
+{
+    fout << s_f << '\n';
+    for (int i = 1; i <= n; ++i)
+        fout << T[i] << " ";
+}
+	</pre>
+	</div>
+	<!-- end content -->
+	<div style = "clear: both;"> &nbsp; </div>
+	</div>
+	<div id = "bottom"></div>
+	<!-- end page -->
+	<!-- start footer -->
+	<div id = "footer"></div>
+	</div>
+	<!-- end footer -->
+</body>
+</html>

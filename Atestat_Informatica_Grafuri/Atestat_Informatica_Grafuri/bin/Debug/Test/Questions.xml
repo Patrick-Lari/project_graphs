@@ -1,0 +1,297 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes"?>
+<database>
+	<!--Question_1-->
+	<question correct = "2">
+		<query>Care dintre următoarele afirmații sunt corecte?</query>
+		<answers>
+			<answer>Într-un graf neorientat o muchie poate fi adiacentă cu un vârf.</answer>
+			<answer>Într-un graf neorientat două muchii pot fi adiacente.</answer>
+			<answer>Într-un graf neorientat o muchie poate fi incidentă cu un vârf.</answer>
+			<answer>Într-un graf neorientat două vârfuri pot fi incidente.</answer>
+		</answers>
+	</question>
+
+	<!--Question_2-->
+	<question correct = "2">
+		<query>Se consideră un graf neorientat cu 50 noduri şi 32 muchii. Care este numărul maxim de vârfuri cu gradul 0 pe care le poate avea graful?</query>
+		<answers>
+			<answer>45</answer>
+			<answer>40</answer>
+			<answer>41</answer>
+			<answer>50</answer>
+		</answers>
+	</question>
+
+	<!--Question_3-->
+	<question correct = "1">
+		<query>Dacă n este un număr natural impar mai mare decât 2, atunci un graf neorientat cu n noduri, în care fiecare nod este adiacent cu exact n-1 noduri, este întotdeauna:</query>
+		<answers>
+			<answer>arbore</answer>
+			<answer>graf eulerian</answer>
+			<answer>graf neconex</answer>
+			<answer>graf aciclic</answer>
+		</answers>
+	</question>
+
+	<!--Question_4-->
+	<question correct = "3">
+		<query>Un graf neorientat cu 8 noduri are gradele nodurilor egale cu 1,2,4,2,3,2,1,x. Pentru ce valoare a lui x graful este arbore?</query>
+		<answers>
+			<answer>x = 1</answer>
+			<answer>x < 3</answer>
+			<answer>x > 3</answer>
+			<answer>nicio valoare</answer>
+		</answers>
+	</question>
+
+	<!--Question_5-->
+	<question correct = "0">
+		<query>Care este numărul maxim de noduri de grad 3 într-un graf neorientat cu 5 noduri?</query>
+		<answers>
+			<answer>4</answer>
+			<answer>5</answer>
+			<answer>3</answer>
+			<answer>2</answer>
+		</answers>
+	</question>
+
+	<!--Question_6-->
+	<question correct = "3">
+		<query>Se consideră un graf neorientat cu 5 noduri şi 9 muchii. Care dintre următoarele şiruri de numere poate fi şirul gradelor nodurilor grafului?</query>
+		<answers>
+			<answer>4, 2, 6, 4, 2</answer>
+			<answer>2, 2, 1, 2, 2</answer>
+			<answer>1, 1, 1, 1, 1</answer>
+			<answer>4, 3, 3, 4, 4</answer>
+		</answers>
+	</question>
+
+	<!--Question_7-->
+	<question correct = "3">
+		<query>Care este numărul maxim de muchii pe care-l poate avea un graf neorientat cu 6 noduri, care nu este conex?</query>
+		<answers>
+			<answer>4</answer>
+			<answer>15</answer>
+			<answer>12</answer>
+			<answer>10</answer>
+		</answers>
+	</question>
+
+	<!--Question_8-->
+	<question correct = "0">
+		<query>Care dintre următoarele afirmaţii este adevărată pentru orice graf neorientat G cu 5 noduri şi 6 muchii?</query>
+		<answers>
+			<answer>G are cel puţin un ciclu</answer>
+			<answer>G este conex</answer>
+			<answer>G are gradele tuturor nodurilor numere pare</answer>
+			<answer>G nu poate avea noduri cu gradul 0</answer>
+		</answers>
+	</question>
+
+	<!--Question_9-->
+	<question correct = "2">
+		<query>Fie n un număr natural, n>4. Orice graf neorientat cu n noduri şi n muchii:</query>
+		<answers>
+			<answer>are gradele tuturor nodurilor numere pare</answer>
+			<answer>este conex</answer>
+			<answer>are cel puţin un ciclu</answer>
+			<answer>este arbore</answer>
+		</answers>
+	</question>
+
+	<!--Question_10-->
+	<question correct = "2">
+		<query>Dacă G este un graf neorientat cu 8 noduri şi 2 componente conexe, atunci graful are cel mult:</query>
+		<answers>
+			<answer>28 de muchii</answer>
+			<answer>12 muchii</answer>
+			<answer>21 de muchii</answer>
+			<answer>16 muchii</answer>
+		</answers>
+	</question>
+
+	<!--Question_11-->
+	<question correct = "3">
+		<query>Se consideră un graf neorientat G cu 101 noduri şi 101 muchii. Numărul maxim de vârfuri izolate ale grafului poate fi:</query>
+		<answers>
+			<answer>0</answer>
+			<answer>10</answer>
+			<answer>50</answer>
+			<answer>86</answer>
+		</answers>
+	</question>
+
+	<!--Question_12-->
+	<question correct = "2">
+		<query>Se consideră un graf neorientat 5 noduri şi 3 muchii. Care este numărul maxim de noduri cu grad 1 care pot exista în graf?</query>
+		<answers>
+			<answer>2</answer>
+			<answer>3</answer>
+			<answer>4</answer>
+			<answer>5</answer>
+		</answers>
+	</question>
+
+	<!--Question_13-->
+	<question correct = "3">
+		<query>Care este numărul minim de muchii care trebuie eliminate dintr-un graf neorientat complet cu 100 de noduri astfel încât graful parţial obţinut să fie eulerian?</query>
+		<answers>
+			<answer>4851</answer>
+			<answer>0</answer>
+			<answer>100</answer>
+			<answer>50</answer>
+		</answers>
+	</question>
+
+	<!--Question_14-->
+	<question correct = "2">
+		<query>Numărul maxim de muchii ale unui graf neorientat, cu 100 de noduri, care nu conţine niciun ciclu, este:</query>
+		<answers>
+			<answer>4950</answer>
+			<answer>50</answer>
+			<answer>99</answer>
+			<answer>100</answer>
+		</answers>
+	</question>
+
+	<!--Question_15-->
+	<question correct = "1">
+		<query>Într-un graf neorientat complet sunt 2016 muchii. Câte vârfuri are graful?</query>
+		<answers>
+			<answer>2015</answer>
+			<answer>64</answer>
+			<answer>63</answer>
+			<answer>Nu există un asemenea graf.</answer>
+		</answers>
+	</question>
+
+	<!--Question_16-->
+	<question correct = "0">
+		<query>Într-un graf neorientat, relația dintre două vârfuri între care există o muchie se numește adiacență</query>
+		<answers>
+			<answer>Adevărat</answer>
+			<answer>Fals</answer>
+		</answers>
+	</question>
+
+	<!--Question_17-->
+	<question correct = "1">
+		<query>Se consideră un graf neorientat cu 6 noduri şi 9 muchii. Numărul de muchii ce trebuie adăugate, pentru ca graful obținut să fie complet, este:</query>
+		<answers>
+			<answer>5</answer>
+			<answer>6</answer>
+			<answer>12</answer>
+			<answer>15</answer>
+		</answers>
+	</question>
+
+	<!--Question_18-->
+	<question correct = "2">
+		<query>Numărul de noduri ale unui graf neorientat fără cicluri, cu 26 de muchii și 12 componente conexe este:</query>
+		<answers>
+			<answer>18</answer>
+			<answer>28</answer>
+			<answer>38</answer>
+			<answer>48</answer>
+		</answers>
+	</question>
+
+	<!--Question_19-->
+	<question correct = "1">
+		<query>Care dintre următoarele afirmații este adevărată pentru orice graf neorientat cu mai mult de două vârfuri?</query>
+		<answers>
+			<answer>Nu există două vârfuri cu același grad.</answer>
+			<answer>Cel puțin două vârfuri au același grad.</answer>
+			<answer>Cel puțin trei vârfuri au același grad.</answer>
+			<answer>Toate vârfurile au același grad.</answer>
+		</answers>
+	</question>
+
+	<!--Question_20-->
+	<question correct = "2">
+		<query>Care dintre cele patru variante de mai jos nu poate reprezenta secvența gradelor vârfurilor unui graf neorientat?</query>
+		<answers>
+			<answer>1, 1, 1, 2, 2, 3</answer>
+			<answer>1, 1, 3, 3, 3, 5</answer>
+			<answer>1, 1, 2, 3, 4, 5</answer>
+			<answer>1, 4, 4, 4, 4, 5</answer>
+		</answers>
+	</question>
+
+	<!--Question_21-->
+	<question correct = "1">
+		<query>Un graf neorientat eulerian cu 5 noduri are un nod cu gradul 4. Indicați numărul minim de muchii ale grafului.</query>
+		<answers>
+			<answer>4</answer>
+			<answer>6</answer>
+			<answer>8</answer>
+			<answer>10</answer>
+		</answers>
+	</question>
+
+	<!--Question_22-->
+	<question correct = "1">
+		<query>Care este numărul minim de arce într-un graf orientat complet cu 5 noduri?</query>
+		<answers>
+			<answer>5</answer>
+			<answer>10</answer>
+			<answer>16</answer>
+			<answer>20</answer>
+		</answers>
+	</question>	
+
+	<!--Question_23-->
+	<question correct = "1">
+		<query>Câte frunze are arborele cu rădăcină descris prin următorul vector ”de taţi”: (6, 5, 5, 2, 0, 3, 3, 3, 8, 7, 7)?</query>
+		<answers>
+			<answer>1</answer>
+			<answer>2</answer>
+			<answer>5</answer>
+			<answer>4</answer>
+		</answers>
+	</question>	
+
+	<!--Question_24-->
+	<question correct = "2">
+		<query>Care dintre următorii vectori NU poate reprezenta vectorul „de taţi” al unui arbore cu rădăcină, cu 5 noduri, numerotate de la 1 la 5?</query>
+		<answers>
+			<answer>3 1 0 1 2</answer>
+			<answer>2 0 1 1 2</answer>
+			<answer>3 4 0 2 3</answer>
+			<answer>4 1 1 0 2</answer>
+		</answers>
+	</question>	
+
+	<!--Question_25-->
+	<question correct = "1">
+		<query>Câte valori nule pot să apară într-un vector cu legături „de tip tată” asociat unui arbore cu rădăcină care conţine 10 noduri?</query>
+		<answers>
+			<answer>niciuna</answer>
+			<answer>exact una</answer>
+			<answer>exact două</answer>
+			<answer>depinde de configuraţia arborelui</answer>
+		</answers>
+	</question>	
+
+	<!--Question_26-->
+	<question correct = "1">
+		<query>Un arbore cu 4 noduri, numerotate de la 1 la 4, NU poate fi reprezentat prin vectorul de „taţi”</query>
+		<answers>
+			<answer>(0, 1, 2, 3)</answer>
+			<answer>(2, 1, 0, 3)</answer>
+			<answer>(4, 4, 4, 0)</answer>
+			<answer>(2, 3, 4, 0)</answer>
+		</answers>
+	</question>
+
+	<!--Question_27-->
+	<question correct = "1">
+		<query>Indicați valorile ce pot reprezenta numărul de fii ai fiecăruia dintre cele șase noduri ale unui arbore cu rădăcină.</query>
+		<answers>
+			<answer>0, 0, 0, 1, 2, 3</answer>
+			<answer>0, 0, 0, 0, 2, 3</answer>
+			<answer>0, 0, 0, 3, 3 ,3</answer>
+			<answer>1, 1, 1, 1, 1, 1</answer>
+		</answers>
+	</question>
+</database>

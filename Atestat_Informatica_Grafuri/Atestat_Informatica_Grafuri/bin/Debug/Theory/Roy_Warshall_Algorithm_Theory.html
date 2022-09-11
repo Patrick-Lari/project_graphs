@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset = UTF-8>
+	<title>Algoritmul lui Roy Warshall</title>
+	<link href = "styles.css" rel = "stylesheet" type = "text/css">
+</head>
+<body>
+	<div id = "main">
+	<!-- start page -->
+	<div id = "top"></div>	
+	<div id = "page">
+	<!-- start content -->
+	<div id = "content">
+	<h2>Algoritmul lui Roy Warshall</h2>
+	<p>Fie <strong>G = (V, U)</strong> un graf orientat cu <strong>n</strong> noduri. Algoritmul Roy-Warshall construiește matricea drumurilor <strong>D</strong> cu <strong>n</strong> linii și <strong>n</strong> coloane, în care:</p><br>
+	<img src = Pictures/Directed_19.png alt = "Directed_19" width = "400" height = "50"><br>
+	<p>Conform definiției de mai sus, în matricea drumurilor, elementele cu indici egali vor avea întotdeauna valoarea <strong>0</strong>. Alternativ, putem accepta și elemente <strong>D<sub>i,i</sub> = 1</strong>, înțelegând prin asta că există un circuit care conține nodul <strong>i</strong>.</p>
+	<p>Pentru a construi această matrice, se pornește de la matricea de adiacență și i se aplică o serie de transformări, pornind de la următoarea idee: dacă nu există drum de la <strong>i</strong> la <strong>j</strong>, dar există drum de la <strong>i</strong> la <strong>k</strong> și drum de la <strong>k</strong> la <strong>j</strong>, atunci va exista și drum de la <strong>i</strong> la <strong>j</strong>, prin reuniunea celor două drumuri existente.</p>
+	<p>Mai exact:</p><br>
+	<ul>
+		<li>inițial avem numai drumurile care nu au noduri intermediare (arcele)</li>
+		<li>determinăm toate drumurile care îl au eventual ca nod intermediar pe <strong>1</strong></li>
+		<li>determinăm toate drumurile care au noduri intermediare numai din mulțimea <strong>{1, 2}</strong></li>
+		<li>determinăm toate drumurile care au noduri intermediare numai din mulțimea <strong>{1, 2, 3}</strong></li>
+		<li><strong>...</strong></li>
+		<li>pentru un <strong>k</strong> oarecare, determinăm toate drumurile care au noduri intermediare numai din mulțimea <strong>{1, 2, ..., k}</strong>. Pentru aceasta, vom căuta toate perechile de noduri <strong>i, j</strong> astfel încât <strong>D<sub>i,k</sub> = 1</strong> și <strong>D<sub>k,j</sub> = 1</strong>, de unde va rezulta că și <strong>D<sub>i,j</sub> = 1</strong>.</li>
+	</ul><br>
+	<h2>Implementare C++</h2><br>
+	<pre style = "margin: 0px 0px 0px 20px;">
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+int a[101][101], n, m;
+
+void Read_Data();
+void Roy_Warshall();
+void Write_Data();
+
+int main()
+{
+    Read_Data();
+    Roy_Warshall();
+    Write_Data();
+    return 0;
+}
+
+void Roy_Warshall()
+{
+    for (int k = 1; k <= n; ++k)
+        for (int i = 1; i <= n; ++i)
+            for (int j = 1; j <= n; ++j)
+                if (!a[i][j] && a[i][k] && a[k][j])
+                    a[i][j] = 1;
+}
+
+void Read_Data()
+{
+    cin >> n >> m;
+    while (m--)
+    {
+        int x, y;
+        cin >> x >> y;
+        a[x][y] = 1;
+    }
+}
+
+void Write_Data()
+{
+    for (int i = 1; i <= n; ++i)
+    {
+        for (int j = 1; j <= n; ++j)
+            cout << a[i][j] << " ";
+        cout << '\n';
+    }
+}
+	</pre>
+	<h2>Reconstituirea drumurilor</h2>
+	<p>Pentru reconstituirea drumurilor vom folosi atât matricea drumurilor cât și matricea de adiacență. Fie acestea <strong>D</strong>, respectiv <strong>A</strong>, iar reconstituirea se bazează pe următorul algoritm recursiv, de tip Divide-et-Impera:</p>
+	<p>Reconstituim drumul de la <strong>i</strong> la <strong>j</strong> – știm că <strong>D<sub>i,j</sub> = 1:</strong></p><br>
+	<ul>
+		<li>dacă există arc de la <strong>i</strong> la <strong>j</strong> (adică <strong>A<sub>i,j</sub> = 1</strong>), atunci acest arc reprezintă și drumul căutat</li>
+		<li>dacă nu există arc, căutăm un nod <strong>k</strong> pentru care <strong>D<sub>i,k</sub> = 1</strong> și <strong>D<sub>k,j</sub> = 1</strong> și reconstituim prin apeluri recursive drumurile de la <strong>i</strong> la <strong>k</strong> și de la <strong>k</strong> la <strong>j</strong>.</li>
+	</ul>
+	</div>
+	<!-- end content -->
+	<div style = "clear: both;"> &nbsp; </div>
+	</div>
+	<div id = "bottom"></div>
+	<!-- end page -->
+	<!-- start footer -->
+	<div id = "footer"></div>
+	</div>
+	<!-- end footer -->
+</body>
+</html>
